@@ -2,4 +2,5 @@ from vizml.sample import Sample
 
 
 def test_sample():
-    assert type("sample") is str
+    a = Sample()
+    assert type(str(a)) is str
