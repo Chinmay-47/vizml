@@ -32,6 +32,14 @@ class BaseDataGenerator(ABC):
         """Generates the respective data points."""
 
 
+class LinearDataGenerator(BaseDataGenerator, ABC):
+    """Base class to generate linear data points."""
+
+    @abstractmethod
+    def generate(self, no_of_points: Optional[int] = 10, is_increasing: Optional[bool] = False):
+        """Generates the respective data points."""
+
+
 class FloatingPointGenerator(BaseDataGenerator):
 
     def generate(self, no_of_points: Optional[int] = 1) -> float:
@@ -51,6 +59,28 @@ class Normal1DGenerator(BaseDataGenerator):
 class Normal2DGenerator(BaseDataGenerator):
 
     def generate(self, no_of_points: Optional[int] = 1):
-        """Generates an array of random float values."""
+        """Generates a 2D array of random float values."""
 
         return np.random.standard_normal(size=(no_of_points, 2))
+
+
+class Normal3DGenerator(BaseDataGenerator):
+
+    def generate(self, no_of_points: Optional[int] = 1):
+        """Generates a 3D array of random float values."""
+
+        return np.random.standard_normal(size=(no_of_points, 3))
+
+
+class Linear1DGenerator(LinearDataGenerator):
+
+    def generate(self, no_of_points: Optional[int] = 10, is_increasing: Optional[bool] = False):
+        """Generates a 1D array of random float values in a linearly ascending or descending order."""
+
+        if not is_increasing:
+            return np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
+                             for i in reversed(range(no_of_points))])
+
+        return np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
+                         for i in range(no_of_points)])
+
