@@ -31,7 +31,7 @@ class BaseDataGenerator(ABC):
         """Generates the respective data points."""
 
 
-class NormalDataGenerator(BaseDataGenerator, ABC):
+class NormalDataGenerator(BaseDataGenerator):
     """Base class to generate normal data points."""
 
     @abstractmethod
@@ -39,7 +39,7 @@ class NormalDataGenerator(BaseDataGenerator, ABC):
         """Generates the respective normal data points."""
 
 
-class LinearDataGenerator(BaseDataGenerator, ABC):
+class LinearDataGenerator(BaseDataGenerator):
     """Base class to generate linear data points."""
 
     @abstractmethod
@@ -106,5 +106,25 @@ class Linear2DGenerator(LinearDataGenerator):
                              for i, j in list(zip(range(no_of_points), reversed(range(no_of_points))))])
 
         return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
+                                   i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+                         for i in range(no_of_points)])
+
+
+class Linear3DGenerator(LinearDataGenerator):
+
+    def generate(self, no_of_points: int = 10, is_increasing: bool = True):
+        """Generates a 3D array of random float values in a linearly ascending or descending order."""
+
+        if no_of_points == 0:
+            return np.array([[], [], []]).transpose()
+
+        if not is_increasing:
+            return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
+                                       i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
+                                       j + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+                             for i, j in list(zip(range(no_of_points), reversed(range(no_of_points))))])
+
+        return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
+                                   i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
                                    i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
                          for i in range(no_of_points)])
