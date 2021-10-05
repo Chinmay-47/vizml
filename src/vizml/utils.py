@@ -1,7 +1,8 @@
-from typing import Callable
+from typing import Callable, Any, Union
 
 
-def add_docstring(input_func: Callable, doc_to_add: str) -> Callable:
+def add_docstring(input_func: Union[Callable[[], Any], Callable[[Any], Any]],
+                  doc_to_add: str) -> Union[Callable[[], Any], Callable[[Any], Any]]:
     """
     Helper function to add docstrings to other functions.
     """

@@ -1,27 +1,33 @@
 from vizml.utils import add_docstring
+import pytest
 
 
-def test_add_to_docstring():
+def func_without_doc():
+    pass
+
+
+def func_without_doc_with_args(a, b):
+    print(a, b)
+
+
+def func_with_doc():
+    """This is a function with docstrings."""
+
+
+def func_with_doc_with_args(a, b):
+    """This is a function with docstrings."""
+    print(a, b)
+
+
+@pytest.mark.parametrize(
+    "input_func", [func_without_doc, func_without_doc_with_args, func_with_doc, func_with_doc_with_args]
+)
+def test_add_to_docstring(input_func):
     """Tests the docstring adder function on functions without existing docs."""
 
-    def func_without_doc():
-        pass
-
+    orig_doc = str(input_func.__doc__).strip()if input_func.__doc__ is not None else ''
     doc_to_add = "Added Docs for Test"
 
-    func_with_new_doc = add_docstring(func_without_doc, doc_to_add)
+    output_func = add_docstring(input_func, doc_to_add)
 
-    assert func_with_new_doc.__doc__ == "Added Docs for Test"
-
-
-def test_add_docstring():
-    """Tests the docstring adder function on functions with existing docs."""
-
-    def func_with_doc():
-        """This is a function with docstrings."""
-
-    doc_to_add = "Added Docs for Test"
-
-    func_with_added_doc = add_docstring(func_with_doc, doc_to_add)
-
-    assert func_with_added_doc.__doc__ == "This is a function with docstrings.\nAdded Docs for Test"
+    assert output_func.__doc__ == (orig_doc + "\nAdded Docs for Test").strip()
