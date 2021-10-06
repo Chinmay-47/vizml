@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 from typing import Sequence, Union, Any
 
 from numpy.typing import NDArray
-from sklearn.metrics import mean_squared_error, mean_absolute_error, max_error
+from sklearn.metrics import (mean_squared_error, mean_absolute_error, max_error, mean_squared_log_error,
+                             median_absolute_error, mean_absolute_percentage_error)
 
 
 class BaseErrorMetric(ABC):
@@ -15,7 +16,7 @@ class BaseErrorMetric(ABC):
 
 
 class MeanSquaredError(BaseErrorMetric):
-    """Class to compute the error using Mean Square Error."""
+    """Class to compute the error using Mean Squared Error."""
 
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
@@ -23,7 +24,7 @@ class MeanSquaredError(BaseErrorMetric):
 
 
 class RootMeanSquaredError(BaseErrorMetric):
-    """Class to compute the error using Root Mean Square Error."""
+    """Class to compute the error using Root Mean Squared Error."""
 
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
@@ -46,10 +47,37 @@ class MaxError(BaseErrorMetric):
         return max_error(array1, array2)
 
 
+class MeanSquaredLogError(BaseErrorMetric):
+    """Class to compute the error using the Mean Squared Log Error."""
+
+    def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
+                array2: Union[NDArray[Any], Sequence[Any]]):
+        return mean_squared_log_error(array1, array2)
+
+
+class MedianAbsoluteError(BaseErrorMetric):
+    """Class to compute the error using the Median Absolute Error."""
+
+    def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
+                array2: Union[NDArray[Any], Sequence[Any]]):
+        return median_absolute_error(array1, array2)
+
+
+class MeanAbsolutePercentageError(BaseErrorMetric):
+    """Class to compute the error using the Mean Absolute Percentage Error."""
+
+    def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
+                array2: Union[NDArray[Any], Sequence[Any]]):
+        return mean_absolute_percentage_error(array1, array2)
+
+
 class Errors:
     """Class to enumerate all available error metrics."""
 
-    MeanSquared = MeanSquaredError()
-    RootMeanSquared = RootMeanSquaredError()
-    MeanAbsolute = MeanAbsoluteError()
-    Max = MaxError()
+    MSE = MeanSquaredError()
+    RMSE = RootMeanSquaredError()
+    MAE = MeanAbsoluteError()
+    MAX = MaxError()
+    MSLE = MeanSquaredLogError()
+    MdAE = MedianAbsoluteError()
+    MAPE = MeanAbsolutePercentageError()
