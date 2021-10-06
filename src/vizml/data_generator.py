@@ -60,7 +60,7 @@ class Normal1DGenerator(NormalDataGenerator):
     def generate(self, no_of_points: int = 1):
         """Generates an array of random float values."""
 
-        return np.random.standard_normal(no_of_points)
+        return np.random.standard_normal(size=(no_of_points, 1))
 
 
 class Normal2DGenerator(NormalDataGenerator):
@@ -85,11 +85,11 @@ class Linear1DGenerator(LinearDataGenerator):
         """Generates a 1D array of random float values in a linearly ascending or descending order."""
 
         if not is_increasing:
-            return np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
-                             for i in reversed(range(no_of_points))])
+            return np.expand_dims(np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
+                                  for i in reversed(range(no_of_points))]), axis=1)
 
-        return np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
-                         for i in range(no_of_points)])
+        return np.expand_dims(np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
+                              for i in range(no_of_points)]), axis=1)
 
 
 class Linear2DGenerator(LinearDataGenerator):

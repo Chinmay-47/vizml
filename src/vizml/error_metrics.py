@@ -5,8 +5,8 @@ from numpy.typing import NDArray
 from sklearn.metrics import mean_squared_error, mean_absolute_error, max_error
 
 
-class BaseCostFunction(ABC):
-    """Base class for all cost functions."""
+class BaseErrorMetric(ABC):
+    """Base class for all error metrics."""
 
     @abstractmethod
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
@@ -14,33 +14,42 @@ class BaseCostFunction(ABC):
         """Computes the cost."""
 
 
-class MeanSquaredError(BaseCostFunction):
-    """Class to compute the cost using Mean Square Error."""
+class MeanSquaredError(BaseErrorMetric):
+    """Class to compute the error using Mean Square Error."""
 
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
         return mean_squared_error(array1, array2)
 
 
-class RootMeanSquaredError(BaseCostFunction):
-    """Class to compute the cost using Root Mean Square Error."""
+class RootMeanSquaredError(BaseErrorMetric):
+    """Class to compute the error using Root Mean Square Error."""
 
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
         return mean_squared_error(array1, array2, squared=False)
 
 
-class MeanAbsoluteError(BaseCostFunction):
-    """Class to compute the cost using Mean Absolute Error."""
+class MeanAbsoluteError(BaseErrorMetric):
+    """Class to compute the error using Mean Absolute Error."""
 
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
         return mean_absolute_error(array1, array2)
 
 
-class MaxError(BaseCostFunction):
-    """Class to compute the cost using the Maximum Error."""
+class MaxError(BaseErrorMetric):
+    """Class to compute the error using the Maximum Error."""
 
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
         return max_error(array1, array2)
+
+
+class Errors:
+    """Class to enumerate all available error metrics."""
+
+    MeanSquared = MeanSquaredError()
+    RootMeanSquared = RootMeanSquaredError()
+    MeanAbsolute = MeanAbsoluteError()
+    Max = MaxError()

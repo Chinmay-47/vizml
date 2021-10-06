@@ -45,4 +45,4 @@ def test_output_shape(no_of_points):
     """Tests the shape of the data generated."""
 
     a = Normal1DGenerator().generate(no_of_points=no_of_points)
-    assert a.shape == (no_of_points, )
+    assert a.shape == (no_of_points, 1)
