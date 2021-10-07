@@ -6,7 +6,11 @@ import numpy as np
 class BaseDataGenerator(ABC):
     """Base class to generate data points."""
 
-    def __init__(self) -> None:
+    def __init__(self, random: bool = False) -> None:
+
+        if random:
+            self.set_seed(new_seed=np.random.choice(range(1, 100000)))
+            return
         self._seed: int = 0
         np.random.seed(seed=self._seed)
 
@@ -84,12 +88,15 @@ class Linear1DGenerator(LinearDataGenerator):
     def generate(self, no_of_points: int = 10, is_increasing: bool = True):
         """Generates a 1D array of random float values in a linearly ascending or descending order."""
 
-        if not is_increasing:
-            return np.expand_dims(np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
-                                  for i in reversed(range(no_of_points))]), axis=1)
+        if no_of_points == 0:
+            return np.array([np.array([])]).transpose()
 
-        return np.expand_dims(np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())
-                              for i in range(no_of_points)]), axis=1)
+        if not is_increasing:
+            return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+                             for i in reversed(range(no_of_points))])
+
+        return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+                         for i in range(no_of_points)])
 
 
 class Linear2DGenerator(LinearDataGenerator):

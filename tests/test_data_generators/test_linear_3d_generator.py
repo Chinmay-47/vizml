@@ -60,3 +60,24 @@ def test_decreasing():
 
     a = Linear3DGenerator().generate(is_increasing=False)
     assert a[-1][-1] < a[0][-1]
+
+
+def test_randomized_init_seed():
+    """Initializing as randomized should set a random seed."""
+
+    a = Linear3DGenerator()
+    b = Linear3DGenerator(random=True)
+
+    assert a.seed_value != b.seed_value
+
+
+@pytest.mark.parametrize(
+    "no_of_points", [0, 1, 2, 3]
+)
+def test_randomized_init_generation(no_of_points):
+    """New instances must generate different first value to old instances if randomized."""
+
+    a = Linear3DGenerator().generate(no_of_points=no_of_points)
+    b = Linear3DGenerator(random=True).generate(no_of_points=no_of_points)
+
+    assert not equal(a, b).any()

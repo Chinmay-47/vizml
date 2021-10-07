@@ -46,3 +46,24 @@ def test_output_shape(no_of_points):
 
     a = Normal3DGenerator().generate(no_of_points=no_of_points)
     assert a.shape == (no_of_points, 3)
+
+
+def test_randomized_init_seed():
+    """Initializing as randomized should set a random seed."""
+
+    a = Normal3DGenerator()
+    b = Normal3DGenerator(random=True)
+
+    assert a.seed_value != b.seed_value
+
+
+@pytest.mark.parametrize(
+    "no_of_points", [0, 1, 2, 3]
+)
+def test_randomized_init_generation(no_of_points):
+    """New instances must generate different first value to old instances if randomized."""
+
+    a = Normal3DGenerator().generate(no_of_points=no_of_points)
+    b = Normal3DGenerator(random=True).generate(no_of_points=no_of_points)
+
+    assert not equal(a, b).any()
