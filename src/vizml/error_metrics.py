@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Sequence, Union, Any
+from typing import Sequence, Union, Any, List, Tuple
 
 from numpy.typing import NDArray
 from sklearn.metrics import (mean_squared_error, mean_absolute_error, max_error, mean_squared_log_error,
@@ -81,3 +81,20 @@ class Errors:
     MSLE = MeanSquaredLogError()
     MdAE = MedianAbsoluteError()
     MAPE = MeanAbsolutePercentageError()
+
+
+def compute_all_errors(array1: Union[NDArray[Any], Sequence[Any]],
+                       array2: Union[NDArray[Any], Sequence[Any]]) -> List[Tuple[str, float]]:
+    """Function to compute all available errors."""
+
+    computed_errors = list()
+
+    for name, err_comp in Errors.__dict__.items():
+        if name.startswith('__'):
+            continue
+        try:
+            computed_errors.append((name, err_comp.compute(array1, array2)))
+        except ValueError:
+            pass
+
+    return computed_errors
