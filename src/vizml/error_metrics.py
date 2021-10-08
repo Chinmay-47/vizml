@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from enum import Enum
 from typing import Sequence, Union, Any, List, Tuple
 
 from numpy.typing import NDArray
@@ -71,7 +72,7 @@ class MeanAbsolutePercentageError(BaseErrorMetric):
         return mean_absolute_percentage_error(array1, array2)
 
 
-class Errors:
+class Error(Enum):
     """Class to enumerate all available error metrics."""
 
     MSE = MeanSquaredError()
@@ -89,11 +90,11 @@ def compute_all_errors(array1: Union[NDArray[Any], Sequence[Any]],
 
     computed_errors = list()
 
-    for name, err_comp in Errors.__dict__.items():
-        if name.startswith('__'):
-            continue
+    for name, err_comp in Error.__members__.items():
+
+        # MSLE throws value error for negative values
         try:
-            computed_errors.append((name, err_comp.compute(array1, array2)))
+            computed_errors.append((name, err_comp.value.compute(array1, array2)))
         except ValueError:
             pass
 
