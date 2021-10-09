@@ -2,7 +2,8 @@ import dash
 from dash import html, dcc
 from dash.dependencies import Input, Output
 
-from vizml.SimpleLinearRegression import OrdinaryLeastSquaresRegression, LassoRegression, RidgeRegression
+from vizml.SimpleLinearRegression import (OrdinaryLeastSquaresRegression, LassoRegression, RidgeRegression,
+                                          SimpleLinearRegression)
 
 app = dash.Dash()
 
@@ -67,6 +68,7 @@ def update_graph(option, val, no_points, tab, is_inc):
 
     randomize = True if val == 'random' else False
     is_increasing = True if is_inc == 'increasing' else False
+    reg: SimpleLinearRegression
 
     if option == 'LassoRegression':
         reg = LassoRegression(randomize=randomize, no_points=no_points, is_increasing=is_increasing)
@@ -85,59 +87,6 @@ def update_graph(option, val, no_points, tab, is_inc):
     else:
         reg.train()
         return reg.show_error_scores(return_fig=True)
-
-#
-# @app.callback(
-#     Output(component_id='plot2', component_property='figure'),
-#     Input(component_id='linear-reg-choice', component_property='value'),
-#     Input(component_id='randomize', component_property='value'),
-#     Input(component_id='no-points', component_property='value')
-# )
-# def update_graph(option, val, no_points):
-#
-#     randomize = True if val == 'random' else False
-#
-#     if option == 'LassoRegression':
-#         reg = LassoRegression(randomize=randomize, no_points=no_points)
-#         reg.train()
-#         return reg.show_regression_line(return_fig=True)
-#
-#     elif option == 'RidgeRegression':
-#         reg = RidgeRegression(randomize=randomize, no_points=no_points)
-#         reg.train()
-#         return reg.show_regression_line(return_fig=True)
-#
-#     reg = OrdinaryLeastSquaresRegression(randomize=randomize, no_points=no_points)
-#     reg.train()
-#
-#     return reg.show_regression_line(return_fig=True)
-#
-#
-# @app.callback(
-#     Output(component_id='plot3', component_property='figure'),
-#     Input(component_id='linear-reg-choice', component_property='value'),
-#     Input(component_id='randomize', component_property='value'),
-#     Input(component_id='no-points', component_property='value')
-# )
-# def update_graph(option, val, no_points):
-#
-#     randomize = True if val == 'random' else False
-#
-#     if option == 'LassoRegression':
-#         reg = LassoRegression(randomize=randomize, no_points=no_points)
-#         reg.train()
-#         return reg.show_error_scores(return_fig=True)
-#
-#     elif option == 'RidgeRegression':
-#         reg = RidgeRegression(randomize=randomize, no_points=no_points)
-#         reg.train()
-#         return reg.show_error_scores(return_fig=True)
-#
-#     reg = OrdinaryLeastSquaresRegression(randomize=randomize, no_points=no_points)
-#     reg.train()
-#
-#     return reg.show_error_scores(return_fig=True)
-#
 
 
 if __name__ == '__main__':
