@@ -14,7 +14,7 @@ class SimpleLinearRegression:
         self.regressor = LinearRegression(n_jobs=-1)
         self.randomize = randomize
         dpgen = Linear1DGenerator(random=randomize)
-        self.x_values = dpgen.generate(no_of_points=no_points, is_increasing=is_increasing)
+        self.x_values = dpgen.generate(no_of_points=no_points)
         self.y_values = dpgen.generate(no_of_points=no_points, is_increasing=is_increasing)
 
     def train(self):
