@@ -92,10 +92,10 @@ class Linear1DGenerator(LinearDataGenerator):
             return np.array([np.array([])]).transpose()
 
         if not is_increasing:
-            return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+            return np.array([np.array([i + (np.random.uniform(1.75, 7) * np.random.standard_normal())])
                              for i in reversed(range(no_of_points))])
 
-        return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+        return np.array([np.array([i + (np.random.uniform(1.75, 7) * np.random.standard_normal())])
                          for i in range(no_of_points)])
 
 
@@ -108,12 +108,12 @@ class Linear2DGenerator(LinearDataGenerator):
             return np.array([[], []]).transpose()
 
         if not is_increasing:
-            return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
-                                       j + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+            return np.array([np.array([i + (np.random.uniform(1.75, 7) * np.random.standard_normal()),
+                                       j + (np.random.uniform(1.75, 7) * np.random.standard_normal())])
                              for i, j in list(zip(range(no_of_points), reversed(range(no_of_points))))])
 
-        return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
-                                   i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+        return np.array([np.array([i + (np.random.uniform(1.75, 7) * np.random.standard_normal()),
+                                   i + (np.random.uniform(1.75, 7) * np.random.standard_normal())])
                          for i in range(no_of_points)])
 
 
@@ -126,12 +126,12 @@ class Linear3DGenerator(LinearDataGenerator):
             return np.array([[], [], []]).transpose()
 
         if not is_increasing:
-            return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
-                                       i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
-                                       j + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+            return np.array([np.array([i + (np.random.uniform(1.75, 7) * np.random.standard_normal()),
+                                       i + (np.random.uniform(1.75, 7) * np.random.standard_normal()),
+                                       j + (np.random.uniform(1.75, 7) * np.random.standard_normal())])
                              for i, j in list(zip(range(no_of_points), reversed(range(no_of_points))))])
 
-        return np.array([np.array([i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
-                                   i + (np.random.uniform(1.5, 3) * np.random.standard_normal()),
-                                   i + (np.random.uniform(1.5, 3) * np.random.standard_normal())])
+        return np.array([np.array([i + (np.random.uniform(1.75, 7) * np.random.standard_normal()),
+                                   i + (np.random.uniform(1.75, 7) * np.random.standard_normal()),
+                                   i + (np.random.uniform(1.75, 7) * np.random.standard_normal())])
                          for i in range(no_of_points)])
