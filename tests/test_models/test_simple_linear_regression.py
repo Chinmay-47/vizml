@@ -1,5 +1,6 @@
 from plotly.graph_objects import Figure
-from vizml.SimpleLinearRegression import OrdinaryLeastSquaresRegression, LassoRegression, RidgeRegression
+from vizml.simple_linear_regression.regression import (OrdinaryLeastSquaresRegression,
+                                                       LassoRegression, RidgeRegression)
 
 
 def test_show_data_OLS():
