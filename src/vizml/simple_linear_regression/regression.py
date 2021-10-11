@@ -36,13 +36,18 @@ class SimpleLinearRegression:
         """
 
         fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
-                                         marker=dict(size=8, color='red', opacity=0.7))])
+                                         marker=dict(size=8, color='#FF4C29', opacity=0.7))])
         fig.update_layout(
             title="Simple Linear Regression Data",
             xaxis_title="X Values",
             yaxis_title="Y Values",
-            title_x=0.5
+            title_x=0.5,
+            plot_bgcolor='#212121',
+            paper_bgcolor='#212121',
+            # font_color='#7FDBFF'
         )
+        fig.update_xaxes(gridcolor='#035397', gridwidth=1)
+        fig.update_yaxes(gridcolor='#035397', gridwidth=1)
 
         if kwargs.get('save'):
             fig.write_image('show_data.jpeg')
@@ -62,18 +67,23 @@ class SimpleLinearRegression:
         """
 
         fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
-                                         marker=dict(size=8, color='red', opacity=0.7), name='Data Points')])
+                                         marker=dict(size=8, color='#FF4C29', opacity=0.7), name='Data Points')])
 
         fig.add_traces(data=[go.Scatter(x=self.x_values.squeeze(),
                                         y=self.predicted_values.squeeze(),
-                                        name='Regression Line', marker=dict(color='green'))])
+                                        name='Regression Line', marker=dict(color='#6D9886'))])
 
         fig.update_layout(
             title="Regression Line",
             xaxis_title="X Values",
             yaxis_title="Y Values",
-            title_x=0.5
+            title_x=0.5,
+            plot_bgcolor='#212121',
+            paper_bgcolor='#212121',
+            # font_color='#7FDBFF'
         )
+        fig.update_xaxes(gridcolor='#F9F3DF')
+        fig.update_yaxes(gridcolor='#F9F3DF')
 
         if kwargs.get('save'):
             fig.write_image('show_regression_line.jpeg')
@@ -96,14 +106,21 @@ class SimpleLinearRegression:
         err_types, err_metrics = tuple(zip(*computed_errors))
 
         fig = go.Figure(data=[go.Bar(x=err_metrics, y=err_types, orientation='h',
-                                     marker=dict(color='red', opacity=0.6))])
+                                     marker=dict(color='#FF4C29', opacity=0.6))])
 
         fig.update_layout(
             title="Error Metrics Computed",
             xaxis_title="Error Value",
             yaxis_title="Error Metric",
-            title_x=0.5
+            title_x=0.5,
+            plot_bgcolor='#212121',
+            paper_bgcolor='#212121',
+            # font_color='#7FDBFF'
         )
+
+        fig.update_yaxes(type='category')
+        fig.update_xaxes(gridcolor='#F9F3DF')
+        fig.update_yaxes(gridcolor='#F9F3DF')
 
         if kwargs.get('save'):
             fig.write_image('show_error_scores.jpeg')
