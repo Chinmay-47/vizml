@@ -46,8 +46,8 @@ class SimpleLinearRegression:
             paper_bgcolor='#212121',
             # font_color='#7FDBFF'
         )
-        fig.update_xaxes(gridcolor='#035397', gridwidth=1)
-        fig.update_yaxes(gridcolor='#035397', gridwidth=1)
+        fig.update_xaxes(gridcolor='#000000', gridwidth=1)
+        fig.update_yaxes(gridcolor='#000000', gridwidth=1)
 
         if kwargs.get('save'):
             fig.write_image('show_data.jpeg')
@@ -82,8 +82,8 @@ class SimpleLinearRegression:
             paper_bgcolor='#212121',
             # font_color='#7FDBFF'
         )
-        fig.update_xaxes(gridcolor='#F9F3DF')
-        fig.update_yaxes(gridcolor='#F9F3DF')
+        fig.update_xaxes(gridcolor='#000000')
+        fig.update_yaxes(gridcolor='#000000')
 
         if kwargs.get('save'):
             fig.write_image('show_regression_line.jpeg')
@@ -119,8 +119,8 @@ class SimpleLinearRegression:
         )
 
         fig.update_yaxes(type='category')
-        fig.update_xaxes(gridcolor='#F9F3DF')
-        fig.update_yaxes(gridcolor='#F9F3DF')
+        fig.update_xaxes(gridcolor='#000000')
+        fig.update_yaxes(gridcolor='#000000')
 
         if kwargs.get('save'):
             fig.write_image('show_error_scores.jpeg')
