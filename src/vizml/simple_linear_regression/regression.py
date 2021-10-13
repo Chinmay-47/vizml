@@ -46,8 +46,8 @@ class SimpleLinearRegression:
             paper_bgcolor='#212121',
             # font_color='#7FDBFF'
         )
-        fig.update_xaxes(gridcolor='#000000', gridwidth=1)
-        fig.update_yaxes(gridcolor='#000000', gridwidth=1)
+        fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+        fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
 
         if kwargs.get('save'):
             fig.write_image('show_data.jpeg')
@@ -82,8 +82,8 @@ class SimpleLinearRegression:
             paper_bgcolor='#212121',
             # font_color='#7FDBFF'
         )
-        fig.update_xaxes(gridcolor='#000000')
-        fig.update_yaxes(gridcolor='#000000')
+        fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+        fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
 
         if kwargs.get('save'):
             fig.write_image('show_regression_line.jpeg')
@@ -105,8 +105,8 @@ class SimpleLinearRegression:
         computed_errors = compute_all_errors(self.y_values, self.predicted_values)
         err_types, err_metrics = tuple(zip(*computed_errors))
 
-        fig = go.Figure(data=[go.Bar(x=err_metrics, y=err_types, orientation='h',
-                                     marker=dict(color='#FF4C29', opacity=0.6))])
+        fig = go.Figure(data=[go.Bar(x=err_metrics, y=err_types, text=err_metrics, textposition='inside',
+                                     orientation='h', marker=dict(color='#FF4C29', opacity=0.6))])
 
         fig.update_layout(
             title="Error Metrics Computed",
@@ -119,8 +119,8 @@ class SimpleLinearRegression:
         )
 
         fig.update_yaxes(type='category')
-        fig.update_xaxes(gridcolor='#000000')
-        fig.update_yaxes(gridcolor='#000000')
+        fig.update_xaxes(showgrid=False)
+        fig.update_yaxes(showgrid=False)
 
         if kwargs.get('save'):
             fig.write_image('show_error_scores.jpeg')
