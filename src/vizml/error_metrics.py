@@ -85,7 +85,8 @@ class Error(Enum):
 
 
 def compute_all_errors(array1: Union[NDArray[Any], Sequence[Any]],
-                       array2: Union[NDArray[Any], Sequence[Any]]) -> List[Tuple[str, float]]:
+                       array2: Union[NDArray[Any], Sequence[Any]],
+                       rounding: int = 3) -> List[Tuple[str, float]]:
     """Function to compute all available errors."""
 
     computed_errors = list()
@@ -94,7 +95,7 @@ def compute_all_errors(array1: Union[NDArray[Any], Sequence[Any]],
 
         # MSLE throws value error for negative values
         try:
-            computed_errors.append((name, err_comp.value.compute(array1, array2)))
+            computed_errors.append((name, round(err_comp.value.compute(array1, array2), rounding)))
         except ValueError:
             pass
 
