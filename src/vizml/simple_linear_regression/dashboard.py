@@ -8,17 +8,23 @@ from vizml.simple_linear_regression.regression import (OrdinaryLeastSquaresRegre
 simple_linear_regression_visualizer = dash.Dash(name="simple_linear_regression")
 
 simple_linear_regression_visualizer.layout = html.Div([
-    html.H1("Simple Linear Regression"),
+    html.H1("Simple Linear Regression",
+            style={'backgroundColor': '#212121',
+                   'textAlign': 'center',
+                   'color': '#C9D6DF'}),
     html.Div([
         dcc.Dropdown(
             id='linear-reg-choice',
             options=[{'label': i, 'value': i} for i in
                      ['OrdinaryLeastSquaresRegression', 'LassoRegression', 'RidgeRegression']],
             value='OrdinaryLeastSquaresRegression',
-            style={'backgroundColor': '#111111',
+            style={'backgroundColor': '#212121',
                    'textAlign': 'center',
-                   'color': '#7FDBFF'}
-        ),
+                   'color': '#C9D6DF',
+                   'width': '100%'}
+        )
+    ]),
+    html.Div([
         dcc.RadioItems(
             id='randomize',
             options=[
@@ -26,10 +32,7 @@ simple_linear_regression_visualizer.layout = html.Div([
                 {'label': 'Random', 'value': 'random'},
             ],
             value='initial',
-            labelStyle={'display': 'inline-block'}
-        )
-    ], style={'width': '48%', 'display': 'inline-block'}, ),
-    html.Div([
+        ),
         dcc.RadioItems(
             id='linearly-increasing',
             options=[
@@ -37,10 +40,9 @@ simple_linear_regression_visualizer.layout = html.Div([
                 {'label': 'Decreasing', 'value': 'decreasing'},
             ],
             value='increasing',
-            labelStyle={'display': 'inline-block'}
         )
     ], style={'width': '48%', 'display': 'inline-block',
-              'backgroundColor': '#111111', 'textAlign': 'center', 'color': '#7FDBFF'}),
+              'backgroundColor': '#212121', 'color': '#C9D6DF'}),
     dcc.Slider(
         id="no-points",
         min=10,
@@ -52,24 +54,28 @@ simple_linear_regression_visualizer.layout = html.Div([
     ),
     dcc.Tabs(id='tabs-example', value='tab-1', children=[
         dcc.Tab(label='Data Points', value='tab-1',
-                style={'backgroundColor': '#111111',
+                style={'backgroundColor': '#212121',
                        'textAlign': 'center',
-                       'color': '#7FDBFF'}),
+                       'color': '#C9D6DF'}
+                ),
         dcc.Tab(label='Regression Line', value='tab-2',
-                style={'backgroundColor': '#111111',
+                style={'backgroundColor': '#212121',
                        'textAlign': 'center',
-                       'color': '#7FDBFF'}),
+                       'color': '#C9D6DF'}
+                ),
         dcc.Tab(label='Error Metrics', value='tab-3',
-                style={'backgroundColor': '#111111',
+                style={'backgroundColor': '#212121',
                        'textAlign': 'center',
-                       'color': '#7FDBFF'}),
-    ], style={'backgroundColor': '#111111',
-              'textAlign': 'center',
-              'color': '#7FDBFF'}),
+                       'color': '#C9D6DF'}
+                ),
+    ], style={
+        'backgroundColor': '#212121',
+        'textAlign': 'center',
+        'color': '#D9CAB3'}),
     dcc.Graph('plot')
-], style={'backgroundColor': '#111111',
+], style={'backgroundColor': '#212121',
           'textAlign': 'center',
-          'color': '#7FDBFF'})
+          'color': '#C9D6DF'})
 
 
 @simple_linear_regression_visualizer.callback(
