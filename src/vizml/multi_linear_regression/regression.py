@@ -3,7 +3,6 @@ from plotly.graph_objects import Figure
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from vizml.data_generator import Linear1DGenerator, Linear2DGenerator
 from vizml.error_metrics import compute_all_errors
-import numpy as np
 
 
 class MultiLinearRegression:
@@ -131,3 +130,31 @@ class MultiLinearRegression:
             return fig
 
         fig.show()
+
+
+class OrdinaryLeastSquaresRegression(MultiLinearRegression):
+    """
+    Performs and Visualizes Ordinary Least Multi Linear Regression.
+    """
+
+
+class LassoRegression(MultiLinearRegression):
+    """
+    Performs and Visualizes Lasso Linear Regression.
+    """
+
+    def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
+                 l1_penalty: float = 0.1):
+        super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize)
+        self.regressor = Lasso(alpha=l1_penalty)
+
+
+class RidgeRegression(MultiLinearRegression):
+    """
+    Performs and Visualizes Ridge Linear Regression.
+    """
+
+    def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
+                 l2_penalty: float = 0.1):
+        super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize)
+        self.regressor = Ridge(alpha=l2_penalty)
