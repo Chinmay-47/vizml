@@ -58,7 +58,7 @@ multi_linear_regression_visualizer.layout = html.Div([
                        'textAlign': 'center',
                        'color': '#C9D6DF'}
                 ),
-        dcc.Tab(label='Regression Line', value='tab-2',
+        dcc.Tab(label='Regression Plane', value='tab-2',
                 style={'backgroundColor': '#212121',
                        'textAlign': 'center',
                        'color': '#C9D6DF'}
