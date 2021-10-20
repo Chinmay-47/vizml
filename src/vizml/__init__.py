@@ -1,1 +1,2 @@
 from vizml.simple_linear_regression.dashboard import visualize_simple_linear_regression
+from vizml.multi_linear_regression.dashboard import visualize_multi_linear_regression
