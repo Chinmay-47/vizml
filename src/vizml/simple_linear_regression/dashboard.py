@@ -111,11 +111,5 @@ def update_graph(option, val, no_points, tab, is_inc):
         return reg.show_error_scores(return_fig=True)
 
 
-def visualize_simple_linear_regression():
-    """Runs a dashboard on localhost to visualize simple linear regression."""
-
-    simple_linear_regression_visualizer.run_server()
-
-
 if __name__ == '__main__':
-    visualize_simple_linear_regression()
+    simple_linear_regression_visualizer.run_server()

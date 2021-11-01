@@ -13,4 +13,3 @@ class Visualize:
     def multi_linear_regression():
         """Runs a dashboard on localhost to visualize Multi linear regression."""
         multi_linear_regression_visualizer.run_server()
-

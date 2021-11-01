@@ -111,11 +111,5 @@ def update_graph(option, val, no_points, tab, is_inc):
         return reg.show_error_scores(return_fig=True)
 
 
-def visualize_multi_linear_regression():
-    """Runs a dashboard on localhost to visualize Multi linear regression."""
-
-    multi_linear_regression_visualizer.run_server()
-
-
 if __name__ == '__main__':
-    visualize_multi_linear_regression()
+    multi_linear_regression_visualizer.run_server()
