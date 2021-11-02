@@ -4,24 +4,21 @@ from dash.dependencies import Input, Output
 
 from vizml.multi_linear_regression.regression import (OrdinaryLeastSquaresRegression, LassoRegression,
                                                       RidgeRegression, MultiLinearRegression)
+from vizml._dashboard_configs import DASH_STYLE
+
 
 multi_linear_regression_visualizer = dash.Dash(name="multi_linear_regression")
 
 multi_linear_regression_visualizer.layout = html.Div([
     html.H1("Multi Linear Regression",
-            style={'backgroundColor': '#212121',
-                   'textAlign': 'center',
-                   'color': '#C9D6DF'}),
+            style=DASH_STYLE),
     html.Div([
         dcc.Dropdown(
             id='linear-reg-choice',
             options=[{'label': i, 'value': i} for i in
                      ['OrdinaryLeastSquaresRegression', 'LassoRegression', 'RidgeRegression']],
             value='OrdinaryLeastSquaresRegression',
-            style={'backgroundColor': '#212121',
-                   'textAlign': 'center',
-                   'color': '#C9D6DF',
-                   'width': '100%'}
+            style=DASH_STYLE | {'width': '100%'}
         )
     ]),
     html.Div([
@@ -41,8 +38,7 @@ multi_linear_regression_visualizer.layout = html.Div([
             ],
             value='increasing',
         )
-    ], style={'width': '48%', 'display': 'inline-block',
-              'backgroundColor': '#212121', 'color': '#C9D6DF'}),
+    ], style=DASH_STYLE | {'width': '48%', 'display': 'inline-block'}),
     dcc.Slider(
         id="no-points",
         min=10,
@@ -54,28 +50,14 @@ multi_linear_regression_visualizer.layout = html.Div([
     ),
     dcc.Tabs(id='tabs-example', value='tab-1', children=[
         dcc.Tab(label='Data Points', value='tab-1',
-                style={'backgroundColor': '#212121',
-                       'textAlign': 'center',
-                       'color': '#C9D6DF'}
-                ),
+                style=DASH_STYLE),
         dcc.Tab(label='Regression Plane', value='tab-2',
-                style={'backgroundColor': '#212121',
-                       'textAlign': 'center',
-                       'color': '#C9D6DF'}
-                ),
+                style=DASH_STYLE),
         dcc.Tab(label='Error Metrics', value='tab-3',
-                style={'backgroundColor': '#212121',
-                       'textAlign': 'center',
-                       'color': '#C9D6DF'}
-                ),
-    ], style={
-        'backgroundColor': '#212121',
-        'textAlign': 'center',
-        'color': '#D9CAB3'}),
+                style=DASH_STYLE),
+    ], style=DASH_STYLE),
     dcc.Graph('plot')
-], style={'backgroundColor': '#212121',
-          'textAlign': 'center',
-          'color': '#C9D6DF'})
+], style=DASH_STYLE)
 
 
 @multi_linear_regression_visualizer.callback(
