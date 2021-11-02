@@ -9,7 +9,7 @@ class BaseDataGenerator(ABC):
     def __init__(self, random: bool = False) -> None:
 
         if random:
-            self.set_seed(new_seed=np.random.choice(range(1, 100000)))
+            np.random.seed(seed=None)
             return
         self._seed: int = 0
         np.random.seed(seed=self._seed)
