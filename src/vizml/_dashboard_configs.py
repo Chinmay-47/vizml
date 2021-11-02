@@ -6,4 +6,3 @@ DASH_STYLE = {
     "textAlign": "center",
     "color": "#C9D6DF"  # font
 }
-
