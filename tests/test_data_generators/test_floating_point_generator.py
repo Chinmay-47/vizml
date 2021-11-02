@@ -1,4 +1,5 @@
 from vizml.data_generator import FloatingPointGenerator
+import pytest
 
 
 def test_same_intial_generation():
@@ -31,12 +32,12 @@ def test_changed_seed_changed_value():
 
 
 def test_randomized_init_seed():
-    """Initializing as randomized should set a random seed."""
+    """Initializing as randomized should set seed value as None."""
 
-    a = FloatingPointGenerator()
     b = FloatingPointGenerator(random=True)
 
-    assert a.seed_value != b.seed_value
+    with pytest.raises(AttributeError):
+        _ = b.seed_value
 
 
 def test_randomized_init_generation():

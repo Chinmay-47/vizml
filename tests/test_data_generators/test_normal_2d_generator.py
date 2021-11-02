@@ -49,12 +49,12 @@ def test_output_shape(no_of_points):
 
 
 def test_randomized_init_seed():
-    """Initializing as randomized should set a random seed."""
+    """Initializing as randomized should set seed value as None."""
 
-    a = Normal2DGenerator()
     b = Normal2DGenerator(random=True)
 
-    assert a.seed_value != b.seed_value
+    with pytest.raises(AttributeError):
+        _ = b.seed_value
 
 
 @pytest.mark.parametrize(
