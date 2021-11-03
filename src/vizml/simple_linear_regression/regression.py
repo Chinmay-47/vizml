@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 from plotly.graph_objects import Figure
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import Linear1DGenerator
 from vizml.error_metrics import compute_all_errors
 
@@ -42,9 +43,10 @@ class SimpleLinearRegression:
             xaxis_title="X Values",
             yaxis_title="Y Values",
             title_x=0.5,
-            plot_bgcolor='#212121',
-            paper_bgcolor='#212121',
-            # font_color='#7FDBFF'
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
         )
         fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
         fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
@@ -78,9 +80,10 @@ class SimpleLinearRegression:
             xaxis_title="X Values",
             yaxis_title="Y Values",
             title_x=0.5,
-            plot_bgcolor='#212121',
-            paper_bgcolor='#212121',
-            # font_color='#7FDBFF'
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
         )
         fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
         fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
@@ -113,9 +116,10 @@ class SimpleLinearRegression:
             xaxis_title="Error Value",
             yaxis_title="Error Metric",
             title_x=0.5,
-            plot_bgcolor='#212121',
-            paper_bgcolor='#212121',
-            # font_color='#7FDBFF'
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
         )
 
         fig.update_yaxes(type='category')

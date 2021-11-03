@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 from plotly.graph_objects import Figure
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import Linear1DGenerator, Linear2DGenerator
 from vizml.error_metrics import compute_all_errors
 
@@ -44,9 +45,10 @@ class MultiLinearRegression:
         fig.update_layout(
             title="Multi Linear Regression Data",
             title_x=0.5,
-            plot_bgcolor='#212121',
-            paper_bgcolor='#212121',
-            # font_color='#7FDBFF'
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
         )
 
         if kwargs.get('save'):
@@ -81,9 +83,10 @@ class MultiLinearRegression:
         fig.update_layout(
             title="Regression Plane",
             title_x=0.5,
-            plot_bgcolor='#212121',
-            paper_bgcolor='#212121',
-            # font_color='#7FDBFF'
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
         )
 
         if kwargs.get('save'):
@@ -114,9 +117,10 @@ class MultiLinearRegression:
             xaxis_title="Error Value",
             yaxis_title="Error Metric",
             title_x=0.5,
-            plot_bgcolor='#212121',
-            paper_bgcolor='#212121',
-            # font_color='#7FDBFF'
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
         )
 
         fig.update_yaxes(type='category')
