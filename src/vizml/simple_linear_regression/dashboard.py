@@ -38,6 +38,15 @@ simple_linear_regression_visualizer.layout = html.Div([
             value='increasing',
         )
     ], style=DASH_STYLE | {'width': '48%', 'display': 'inline-block'}),
+    dcc.Tabs(id='tabs', value='tab-1', children=[
+        dcc.Tab(label='Data Points', value='tab-1',
+                style=DASH_STYLE),
+        dcc.Tab(label='Regression Line', value='tab-2',
+                style=DASH_STYLE),
+        dcc.Tab(label='Error Metrics', value='tab-3',
+                style=DASH_STYLE),
+    ], style=DASH_STYLE),
+    dcc.Graph('plot'),
     dcc.Slider(
         id="no-points",
         min=10,
@@ -47,28 +56,22 @@ simple_linear_regression_visualizer.layout = html.Div([
         value=10,
         dots=False,
     ),
-    dcc.Tabs(id='tabs-example', value='tab-1', children=[
-        dcc.Tab(label='Data Points', value='tab-1',
-                style=DASH_STYLE),
-        dcc.Tab(label='Regression Line', value='tab-2',
-                style=DASH_STYLE),
-        dcc.Tab(label='Error Metrics', value='tab-3',
-                style=DASH_STYLE),
-    ], style=DASH_STYLE),
-    dcc.Graph('plot')
+    dcc.Store(id='plot1'),
+    dcc.Store(id='plot2'),
+    dcc.Store(id='plot3')
 ], style=DASH_STYLE)
 
 
 @simple_linear_regression_visualizer.callback(
-    Output(component_id='plot', component_property='figure'),
+    Output(component_id='plot1', component_property='figure'),
+    Output(component_id='plot2', component_property='figure'),
+    Output(component_id='plot3', component_property='figure'),
     Input(component_id='linear-reg-choice', component_property='value'),
     Input(component_id='randomize', component_property='value'),
     Input(component_id='no-points', component_property='value'),
-    Input(component_id='tabs-example', component_property='value'),
     Input(component_id='linearly-increasing', component_property='value')
 )
-def update_graph(option, val, no_points, tab, is_inc):
-
+def init_regressor(option, val, no_points, is_inc):
     randomize = True if val == 'random' else False
     is_increasing = True if is_inc == 'increasing' else False
     reg: SimpleLinearRegression
@@ -82,14 +85,27 @@ def update_graph(option, val, no_points, tab, is_inc):
     else:
         reg = OrdinaryLeastSquaresRegression(randomize=randomize, no_points=no_points, is_increasing=is_increasing)
 
+    reg.train()
+
+    return (reg.show_data(return_fig=True), reg.show_regression_line(return_fig=True),
+            reg.show_error_scores(return_fig=True))
+
+
+@simple_linear_regression_visualizer.callback(
+    Output(component_id='plot', component_property='figure'),
+    Input(component_id='tabs', component_property='value'),
+    Input(component_id='plot1', component_property='figure'),
+    Input(component_id='plot2', component_property='figure'),
+    Input(component_id='plot3', component_property='figure')
+)
+def update_graph(tab, plot1, plot2, plot3):
+
     if tab == 'tab-1':
-        return reg.show_data(return_fig=True)
+        return plot1
     elif tab == 'tab-2':
-        reg.train()
-        return reg.show_regression_line(return_fig=True)
+        return plot2
     else:
-        reg.train()
-        return reg.show_error_scores(return_fig=True)
+        return plot3
 
 
 if __name__ == '__main__':
