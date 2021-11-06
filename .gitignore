@@ -9,6 +9,9 @@ __pycache__/
 # Pycharm stuff
 .idea/
 
+# Cache file
+src/vizml/.DS_Store
+
 # Distribution / packaging
 .Python
 build/
