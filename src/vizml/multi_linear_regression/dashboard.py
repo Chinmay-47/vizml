@@ -39,7 +39,7 @@ multi_linear_regression_visualizer.layout = html.Div([
             value='increasing',
         )
     ], style=DASH_STYLE | {'width': '48%', 'display': 'inline-block'}),
-    dcc.Tabs(id='tabs', value='tab-1', children=[
+    dcc.Tabs(id='plot-tabs', value='tab-1', children=[
         dcc.Tab(label='Data Points', value='tab-1',
                 style=DASH_STYLE),
         dcc.Tab(label='Regression Plane', value='tab-2',
@@ -94,7 +94,7 @@ def init_regressor(option, val, no_points, is_inc):
 
 @multi_linear_regression_visualizer.callback(
     Output(component_id='plot', component_property='figure'),
-    Input(component_id='tabs', component_property='value'),
+    Input(component_id='plot-tabs', component_property='value'),
     Input(component_id='plot1', component_property='figure'),
     Input(component_id='plot2', component_property='figure'),
     Input(component_id='plot3', component_property='figure')
