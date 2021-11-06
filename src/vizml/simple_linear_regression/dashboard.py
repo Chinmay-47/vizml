@@ -13,13 +13,23 @@ simple_linear_regression_visualizer.layout = html.Div([
     html.H1("Simple Linear Regression",
             style=DASH_STYLE),
     html.Div([
-        dcc.Dropdown(
-            id='linear-reg-choice',
-            options=[{'label': i, 'value': i} for i in
-                     ['OrdinaryLeastSquaresRegression', 'LassoRegression', 'RidgeRegression']],
-            value='OrdinaryLeastSquaresRegression',
-            style=DASH_STYLE | {'width': '100%'})
+        dcc.Tabs(id='type-tabs', value='tab-1', children=[
+            dcc.Tab(label='Ordinary Least Squares Regression', value='tab-1',
+                    style=DASH_STYLE),
+            dcc.Tab(label='Lasso Regression', value='tab-2',
+                    style=DASH_STYLE),
+            dcc.Tab(label='Ridge Regression', value='tab-3',
+                    style=DASH_STYLE),
+        ], style=DASH_STYLE)
     ]),
+    dcc.Tabs(id='plot-tabs', value='tab-1', children=[
+        dcc.Tab(label='Data Points', value='tab-1',
+                style=DASH_STYLE),
+        dcc.Tab(label='Regression Line', value='tab-2',
+                style=DASH_STYLE),
+        dcc.Tab(label='Error Metrics', value='tab-3',
+                style=DASH_STYLE),
+    ], style=DASH_STYLE),
     html.Div([
         dcc.RadioItems(
             id='randomize',
@@ -38,21 +48,13 @@ simple_linear_regression_visualizer.layout = html.Div([
             value='increasing',
         )
     ], style=DASH_STYLE | {'width': '48%', 'display': 'inline-block'}),
-    dcc.Tabs(id='plot-tabs', value='tab-1', children=[
-        dcc.Tab(label='Data Points', value='tab-1',
-                style=DASH_STYLE),
-        dcc.Tab(label='Regression Line', value='tab-2',
-                style=DASH_STYLE),
-        dcc.Tab(label='Error Metrics', value='tab-3',
-                style=DASH_STYLE),
-    ], style=DASH_STYLE),
     dcc.Graph('plot'),
     dcc.Slider(
         id="no-points",
         min=10,
         max=100,
         step=1,
-        marks={str(i): str(i) for i in range(10, 105, 5)},
+        marks={str(i): "{} points".format(i) for i in range(10, 110, 10)},
         value=10,
         dots=False,
     ),
@@ -66,20 +68,22 @@ simple_linear_regression_visualizer.layout = html.Div([
     Output(component_id='plot1', component_property='figure'),
     Output(component_id='plot2', component_property='figure'),
     Output(component_id='plot3', component_property='figure'),
-    Input(component_id='linear-reg-choice', component_property='value'),
+    Input(component_id='type-tabs', component_property='value'),
     Input(component_id='randomize', component_property='value'),
     Input(component_id='no-points', component_property='value'),
     Input(component_id='linearly-increasing', component_property='value')
 )
-def init_regressor(option, val, no_points, is_inc):
+def init_regressor(type_tab, val, no_points, is_inc):
+    """Initializes the regressor and stores the initial plots."""
+
     randomize = True if val == 'random' else False
     is_increasing = True if is_inc == 'increasing' else False
     reg: SimpleLinearRegression
 
-    if option == 'LassoRegression':
+    if type_tab == 'tab-1':
         reg = LassoRegression(randomize=randomize, no_points=no_points, is_increasing=is_increasing)
 
-    elif option == 'RidgeRegression':
+    elif type_tab == 'tab-2':
         reg = RidgeRegression(randomize=randomize, no_points=no_points, is_increasing=is_increasing)
 
     else:
@@ -98,11 +102,12 @@ def init_regressor(option, val, no_points, is_inc):
     Input(component_id='plot2', component_property='figure'),
     Input(component_id='plot3', component_property='figure')
 )
-def update_graph(tab, plot1, plot2, plot3):
+def update_graph(plot_tab, plot1, plot2, plot3):
+    """Switches plot based on selection"""
 
-    if tab == 'tab-1':
+    if plot_tab == 'tab-1':
         return plot1
-    elif tab == 'tab-2':
+    elif plot_tab == 'tab-2':
         return plot2
     else:
         return plot3
