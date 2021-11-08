@@ -31,6 +31,17 @@ simple_linear_regression_visualizer.layout = html.Div([
                 style=DASH_STYLE),
     ], style=DASH_STYLE),
     html.Div([
+        dcc.Slider(
+            id="no-points",
+            min=10,
+            max=100,
+            step=1,
+            marks={str(i): str(i) for i in range(10, 110, 10)},
+            tooltip={"placement": "bottom", "always_visible": False},
+            value=10,
+            dots=False)
+    ], style=DASH_STYLE | {'margin-top': '5px', 'margin-bottom': '5px'}),
+    html.Div([
         dcc.RadioItems(
             id='randomize',
             options=[
@@ -38,6 +49,7 @@ simple_linear_regression_visualizer.layout = html.Div([
                 {'label': 'Random', 'value': 'random'},
             ],
             value='initial',
+            style={'display': 'inline-block', 'width': '40%'}
         ),
         dcc.RadioItems(
             id='linearly-increasing',
@@ -46,18 +58,10 @@ simple_linear_regression_visualizer.layout = html.Div([
                 {'label': 'Decreasing', 'value': 'decreasing'},
             ],
             value='increasing',
+            style={'display': 'inline-block', 'width': '40%'}
         )
-    ], style=DASH_STYLE | {'width': '48%', 'display': 'inline-block'}),
+    ], style=DASH_STYLE),
     dcc.Graph('plot'),
-    dcc.Slider(
-        id="no-points",
-        min=10,
-        max=100,
-        step=1,
-        marks={str(i): "{} points".format(i) for i in range(10, 110, 10)},
-        value=10,
-        dots=False,
-    ),
     dcc.Store(id='plot1'),
     dcc.Store(id='plot2'),
     dcc.Store(id='plot3')
