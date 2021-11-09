@@ -11,10 +11,11 @@ class SimpleLinearRegression:
     Performs and Visualizes Simple Linear Regression.
     """
 
-    def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False):
+    def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
+                 random_state: int = -1):
         self.regressor = LinearRegression(n_jobs=-1)
         self.randomize = randomize
-        dpgen = Linear1DGenerator(random=randomize)
+        dpgen = Linear1DGenerator(random=randomize, random_state=random_state)
         self.x_values = dpgen.generate(no_of_points=no_points)
         self.y_values = dpgen.generate(no_of_points=no_points, is_increasing=is_increasing)
 
@@ -147,8 +148,9 @@ class LassoRegression(SimpleLinearRegression):
     """
 
     def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
-                 l1_penalty: float = 0.1):
-        super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize)
+                 l1_penalty: float = 0.1, random_state: int = -1):
+        super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize,
+                         random_state=random_state)
         self.regressor = Lasso(alpha=l1_penalty)
 
 
@@ -158,6 +160,7 @@ class RidgeRegression(SimpleLinearRegression):
     """
 
     def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
-                 l2_penalty: float = 0.1):
-        super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize)
+                 l2_penalty: float = 0.1, random_state: int = -1):
+        super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize,
+                         random_state=random_state)
         self.regressor = Ridge(alpha=l2_penalty)
