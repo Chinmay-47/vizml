@@ -6,10 +6,14 @@ import numpy as np
 class BaseDataGenerator(ABC):
     """Base class to generate data points."""
 
-    def __init__(self, random: bool = False) -> None:
+    def __init__(self, random: bool = False, random_state: int = -1) -> None:
 
         if random:
             np.random.seed(seed=None)
+            return
+        if random_state != -1:
+            self._seed: int = random_state
+            np.random.seed(seed=self._seed)
             return
         self._seed: int = 0
         np.random.seed(seed=self._seed)
