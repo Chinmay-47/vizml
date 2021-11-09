@@ -11,11 +11,8 @@ class BaseDataGenerator(ABC):
         if random:
             np.random.seed(seed=None)
             return
-        if random_state != -1:
-            self._seed: int = random_state
-            np.random.seed(seed=self._seed)
-            return
-        self._seed: int = 0
+
+        self._seed: int = 0 if random_state == -1 else random_state
         np.random.seed(seed=self._seed)
 
     @property
