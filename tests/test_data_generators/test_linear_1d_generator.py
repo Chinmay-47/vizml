@@ -81,3 +81,21 @@ def test_randomized_init_generation(no_of_points):
     b = Linear1DGenerator(random=True).generate(no_of_points=no_of_points)
 
     assert not equal(a, b).any()
+
+
+def test_same_random_state_gen_value():
+    """New instances with same random state generates same values."""
+
+    a = Linear1DGenerator(random_state=7).generate()
+    b = Linear1DGenerator(random_state=7).generate()
+
+    assert equal(a, b).all()
+
+
+def test_diff_random_state_gen_value():
+    """New instances with different random state generates different values."""
+
+    a = Linear1DGenerator(random_state=7).generate()
+    b = Linear1DGenerator(random_state=11).generate()
+
+    assert not equal(a, b).any()

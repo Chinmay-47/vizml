@@ -47,3 +47,21 @@ def test_randomized_init_generation():
     b = FloatingPointGenerator(random=True).generate()
 
     assert a != b
+
+
+def test_same_random_state_gen_value():
+    """New instances with same random state generates same values."""
+
+    a = FloatingPointGenerator(random_state=7).generate()
+    b = FloatingPointGenerator(random_state=7).generate()
+
+    assert a == b
+
+
+def test_diff_random_state_gen_value():
+    """New instances with different random state generates different values."""
+
+    a = FloatingPointGenerator(random_state=7).generate()
+    b = FloatingPointGenerator(random_state=11).generate()
+
+    assert a != b
