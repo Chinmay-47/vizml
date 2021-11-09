@@ -42,7 +42,7 @@ simple_linear_regression_visualizer.layout = html.Div([
             tooltip={"placement": "bottom", "always_visible": False},
             value=10,
             dots=False)
-    ], style=DASH_STYLE | {'margin-top': '5px', 'margin-bottom': '5px'}),
+    ], style={**DASH_STYLE, **{'margin-top': '5px', 'margin-bottom': '5px'}}),
     html.Div([
         dcc.RadioItems(
             id='randomize',
