@@ -91,7 +91,7 @@ class MultiLinearRegression:
         )
 
         if kwargs.get('save'):
-            fig.write_image('show_regression_line.jpeg')
+            fig.write_image('show_regression_plane.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
