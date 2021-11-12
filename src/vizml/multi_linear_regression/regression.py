@@ -20,7 +20,7 @@ class MultiLinearRegression:
         self.x_values = dpgen1.generate(no_of_points=no_points)
         self.y_values = dpgen2.generate(no_of_points=no_points, is_increasing=is_increasing)
 
-    def train(self):
+    def train(self) -> None:
         """Trains the Model"""
         self.regressor.fit(self.x_values, self.y_values)
 

@@ -76,7 +76,7 @@ class KMeansClustering:
 
         fig.show()
 
-    def train(self):
+    def train(self) -> None:
         """Trains the Model"""
         self.clustering.fit(self.data_points)
 
