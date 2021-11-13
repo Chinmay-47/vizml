@@ -1,7 +1,7 @@
 from numpy import equal
 from plotly.graph_objects import Figure
-from vizml.simple_linear_regression.regression import (OrdinaryLeastSquaresRegression,
-                                                       LassoRegression, RidgeRegression)
+from vizml.multi_linear_regression.regression import (OrdinaryLeastSquaresRegression,
+                                                      LassoRegression, RidgeRegression)
 
 
 def test_show_data_OLS():
@@ -28,30 +28,30 @@ def test_show_data_Ridge():
     assert isinstance(fig, Figure)
 
 
-def test_show_regression_line_OLS():
-    """Tests the show regression line function in OLS."""
+def test_show_regression_plane_OLS():
+    """Tests the show regression plane function in OLS."""
 
     reg = OrdinaryLeastSquaresRegression()
     reg.train()
-    fig = reg.show_regression_line(return_fig=True)
+    fig = reg.show_regression_plane(return_fig=True)
     assert isinstance(fig, Figure)
 
 
-def test_show_regression_line_Lasso():
-    """Tests the show regression line function in Lasso."""
+def test_show_regression_plane_Lasso():
+    """Tests the show regression plane function in Lasso."""
 
     reg = LassoRegression()
     reg.train()
-    fig = reg.show_regression_line(return_fig=True)
+    fig = reg.show_regression_plane(return_fig=True)
     assert isinstance(fig, Figure)
 
 
-def test_show_regression_line_Ridge():
-    """Tests the show regression line function in Ridge."""
+def test_show_regression_plane_Ridge():
+    """Tests the show regression plane function in Ridge."""
 
     reg = RidgeRegression()
     reg.train()
-    fig = reg.show_regression_line(return_fig=True)
+    fig = reg.show_regression_plane(return_fig=True)
     assert isinstance(fig, Figure)
 
 
