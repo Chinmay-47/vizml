@@ -1,5 +1,5 @@
-from vizml.data_generator import FloatingPointGenerator
 import pytest
+from vizml.data_generator import FloatingPointGenerator
 
 
 def test_same_intial_generation():
