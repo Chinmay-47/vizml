@@ -97,11 +97,12 @@ class KMeansClustering:
         if self.is_3d:
             fig = go.Figure(data=[go.Scatter3d(x=self.x1_values.squeeze(), y=self.x2_values.squeeze(),
                                                z=self.y_values.squeeze(), mode='markers',
-                                               marker=dict(size=8, color=self.labels, opacity=0.7))])
+                                               marker=dict(size=8, color=self.labels, opacity=0.7),
+                                               name='Data Points')])
             fig.add_traces(data=[go.Scatter3d(x=self.clustering.cluster_centers_[:, 0],
                                               y=self.clustering.cluster_centers_[:, 1],
                                               z=self.clustering.cluster_centers_[:, 2], mode='markers',
-                                              marker=dict(size=8, color='#FFFFFF', opacity=0.7),
+                                              marker=dict(size=8, color='#FFFFFF'),
                                               name='Cluster Centers')])
             fig.update_layout(
                 title="Clustering",
@@ -114,11 +115,12 @@ class KMeansClustering:
 
         else:
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
-                                             marker=dict(size=8, color=self.labels, opacity=0.7))])
+                                             marker=dict(size=8, color=self.labels, opacity=0.7),
+                                             name='Data Points')])
 
             fig.add_traces(data=[go.Scatter(x=self.clustering.cluster_centers_[:, 0],
                                             y=self.clustering.cluster_centers_[:, 1], mode='markers',
-                                            marker=dict(size=8, color='#FFFFFF', opacity=0.7), name='Cluster Centers')])
+                                            marker=dict(size=8, color='#FFFFFF'), name='Cluster Centers')])
 
             fig.update_layout(
                 title="Clustering",
@@ -157,10 +159,16 @@ class KMeansClustering:
             inertia = k_means.inertia_
             wcss_list.append(inertia)
 
-        fig = go.Figure(data=[go.Scatter(x=list(range(1, 16)), y=wcss_list, marker=dict(color='#6D9886'))])
+        fig = go.Figure(data=[go.Scatter(x=list(range(1, 16)), y=wcss_list,
+                                         marker=dict(color='#6D9886'), name='Elbow Plot')])
+
+        fig.add_traces(data=[go.Scatter(x=[self.no_clusters],
+                                        y=[wcss_list[self.no_clusters - 1]], mode='markers',
+                                        marker=dict(size=8, color='#FFFFFF'),
+                                        name='Current Clusters')])
 
         fig.update_layout(
-            title="Elbow Method Plot",
+            title="Elbow Method",
             xaxis_title="Number of Clusters",
             yaxis_title="WCSS",
             title_x=0.5,
