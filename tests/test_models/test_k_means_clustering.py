@@ -14,6 +14,7 @@ def test_show_clusters():
     """Tests the show clusters function in K means Clustering"""
 
     clu = KMeansClustering()
+    clu.train()
     fig = clu.show_clusters(return_fig=True)
     assert isinstance(fig, Figure)
 
