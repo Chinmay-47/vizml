@@ -95,3 +95,21 @@ def test_random_state_3d():
     data2 = clu2.data_points
 
     assert equal(data1, data2).all()
+
+
+def test_change_num_clusters():
+    """Tests the function to change number of clusters to detect."""
+
+    clu1 = KMeansClustering(no_clusters=3)
+    clu1.change_num_clusters(5)
+
+    assert clu1.no_clusters == 5 and clu1.clustering.n_clusters == 5
+
+
+def test_change_num_clusters_3d():
+    """Tests the function to change number of clusters to detect for 3d config."""
+
+    clu1 = KMeansClustering(no_clusters=3, is_3d=True)
+    clu1.change_num_clusters(5)
+
+    assert clu1.no_clusters == 5 and clu1.clustering.n_clusters == 5
