@@ -8,7 +8,7 @@ from vizml.data_generator import Normal2DGenerator, Normal3DGenerator, NormalDat
 class KMeansClustering:
     """Class to perform and visualize K Means Clustering."""
 
-    def __init__(self, no_points: int = 60, no_clusters: int = 3, randomize: bool = False,
+    def __init__(self, no_points: int = 100, no_clusters: int = 3, randomize: bool = False,
                  random_state: int = -1, is_3d: bool = False):
 
         self.no_clusters = no_clusters
