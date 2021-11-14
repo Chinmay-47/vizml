@@ -28,6 +28,11 @@ class KMeansClustering:
             self.x_values = self.data_points[:, 0]
             self.y_values = self.data_points[:, 1]
 
+    def change_num_clusters(self, no_clusters: int) -> None:
+        """Change the number of clusters to detect for the same data."""
+        self.no_clusters = no_clusters
+        self.clustering = KMeans(n_clusters=no_clusters)
+
     def show_data(self, **kwargs) -> Figure:
         """
         Shows a plot of the data points used to perform K means clustering.
@@ -102,7 +107,7 @@ class KMeansClustering:
             fig.add_traces(data=[go.Scatter3d(x=self.clustering.cluster_centers_[:, 0],
                                               y=self.clustering.cluster_centers_[:, 1],
                                               z=self.clustering.cluster_centers_[:, 2], mode='markers',
-                                              marker=dict(size=8, color='#FFFFFF'),
+                                              marker=dict(size=6, color='#FFFFFF'),
                                               name='Cluster Centers')])
             fig.update_layout(
                 title="Clustering",
@@ -120,7 +125,7 @@ class KMeansClustering:
 
             fig.add_traces(data=[go.Scatter(x=self.clustering.cluster_centers_[:, 0],
                                             y=self.clustering.cluster_centers_[:, 1], mode='markers',
-                                            marker=dict(size=8, color='#FFFFFF'), name='Cluster Centers')])
+                                            marker=dict(size=6, color='#FFFFFF'), name='Cluster Centers')])
 
             fig.update_layout(
                 title="Clustering",
@@ -153,13 +158,13 @@ class KMeansClustering:
         """
 
         wcss_list = []
-        for i in range(1, 16):
+        for i in range(1, 21):
             k_means = KMeans(n_clusters=i)
             k_means.fit(self.data_points)
             inertia = k_means.inertia_
             wcss_list.append(inertia)
 
-        fig = go.Figure(data=[go.Scatter(x=list(range(1, 16)), y=wcss_list,
+        fig = go.Figure(data=[go.Scatter(x=list(range(1, 21)), y=wcss_list,
                                          marker=dict(color='#6D9886'), name='Elbow Plot')])
 
         fig.add_traces(data=[go.Scatter(x=[self.no_clusters],
