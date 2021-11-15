@@ -4,7 +4,7 @@ from plotly.graph_objects import Figure
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
 from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import Linear1DGenerator, Linear2DGenerator
-from vizml.error_metrics import compute_all_errors
+from vizml.metrics.regression_metrics import compute_all_errors
 
 
 class MultiLinearRegression:
