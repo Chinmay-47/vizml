@@ -4,7 +4,7 @@ from typing import Sequence, Union, Any, List, Tuple
 
 from numpy.typing import NDArray
 from sklearn.metrics import (mean_squared_error, mean_absolute_error, max_error, mean_squared_log_error,
-                             median_absolute_error, mean_absolute_percentage_error)
+                             median_absolute_error, mean_absolute_percentage_error, r2_score)
 
 
 class BaseErrorMetric(ABC):
@@ -72,6 +72,14 @@ class MeanAbsolutePercentageError(BaseErrorMetric):
         return mean_absolute_percentage_error(array1, array2)
 
 
+class RSquaredScore(BaseErrorMetric):
+    """Class to compute the R2 score."""
+
+    def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
+                array2: Union[NDArray[Any], Sequence[Any]]):
+        return r2_score(array1, array2)
+
+
 class Error(Enum):
     """Class to enumerate all available error metrics."""
 
@@ -82,6 +90,7 @@ class Error(Enum):
     MSLE = MeanSquaredLogError()
     MdAE = MedianAbsoluteError()
     MAPE = MeanAbsolutePercentageError()
+    R2 = RSquaredScore()
 
 
 def compute_all_errors(array1: Union[NDArray[Any], Sequence[Any]],
