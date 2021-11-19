@@ -3,6 +3,7 @@
 ![Tests](https://github.com/Chinmay-47/vizml/actions/workflows/tests.yml/badge.svg?style=plastic)
 ![Commits](https://img.shields.io/github/commit-activity/y/Chinmay-47/vizml?label=Commits&style=plastic)
 ![License](https://img.shields.io/github/license/Chinmay-47/vizml?label=License&style=plastic)
+![Python](https://img.shields.io/badge/Python-3.8%2C%203.9-blue?style=plastic)
 
 
 ### About
@@ -37,14 +38,25 @@ Vizml is an open source project that can be used by anybody.
 However, the ideal users would be:
 - Beginners who are new to ML algorithms
 - Teachers who want to use visualizations in their courses
-- Anybody who wants to refresh their understanding of these ML algorithms
+- Anybody who wants to refresh their understanding of ML algorithms
 
 <br>
 
 ### Contribute
 Contributions to enhance the project are welcome.
+
 Some ideas for contribution are:
 - Accepting external data from users for custom visualizations
 - Documentation for the sub-modules
-- Extending the project to more visualize more algorithms
+- Extending the project to visualize more algorithms
 
+<br>
+
+### Running Tests
+After installing in editable mode, run the following 
+commands from the project root directory.
+```
+mypy src tests
+flake8 src tests
+pytest
+```
