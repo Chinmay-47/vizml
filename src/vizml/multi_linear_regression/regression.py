@@ -151,7 +151,7 @@ class LassoRegression(MultiLinearRegression):
     """
 
     def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
-                 l1_penalty: float = 0.1, random_state: int = -1):
+                 l1_penalty: float = 1.0, random_state: int = -1):
         super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize,
                          random_state=random_state)
         self.regressor = Lasso(alpha=l1_penalty)
@@ -163,7 +163,7 @@ class RidgeRegression(MultiLinearRegression):
     """
 
     def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
-                 l2_penalty: float = 0.1, random_state: int = -1):
+                 l2_penalty: float = 1.0, random_state: int = -1):
         super().__init__(no_points=no_points, is_increasing=is_increasing, randomize=randomize,
                          random_state=random_state)
         self.regressor = Ridge(alpha=l2_penalty)
