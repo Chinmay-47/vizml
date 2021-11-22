@@ -28,6 +28,23 @@ def test_show_elbow_plot():
     assert isinstance(fig, Figure)
 
 
+def test_show_avg_silhouette_scores():
+    """Tests the show avg silhouette scores function in K Means Clustering."""
+
+    clu = KMeansClustering()
+    fig = clu.show_avg_silhouette_scores(return_fig=True)
+    assert isinstance(fig, Figure)
+
+
+def test_show_silhouette_plot():
+    """Tests the show silhouette plot function in K Means Clustering."""
+
+    clu = KMeansClustering()
+    clu.train()
+    fig = clu.show_silhouette_plot(return_fig=True)
+    assert isinstance(fig, Figure)
+
+
 def test_show_data_3d():
     """Tests the show data function in K means Clustering for 3d config."""
 
@@ -50,6 +67,23 @@ def test_show_elbow_plot_3d():
 
     clu = KMeansClustering(is_3d=True)
     fig = clu.show_elbow_plot(return_fig=True)
+    assert isinstance(fig, Figure)
+
+
+def test_show_avg_silhouette_scores_3d():
+    """Tests the show avg silhouette scores function in K Means Clustering for 3d config."""
+
+    clu = KMeansClustering(is_3d=True)
+    fig = clu.show_avg_silhouette_scores(return_fig=True)
+    assert isinstance(fig, Figure)
+
+
+def test_show_silhouette_plot_3d():
+    """Tests the show silhouette plot function in K Means Clustering for 3d config."""
+
+    clu = KMeansClustering(is_3d=True)
+    clu.train()
+    fig = clu.show_silhouette_plot(return_fig=True)
     assert isinstance(fig, Figure)
 
 
