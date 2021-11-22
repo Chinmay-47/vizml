@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from sklearn.metrics import silhouette_samples, silhouette_score
-from numpy.typing import NDArray
 from typing import Sequence, Union, Any
+
+from numpy.typing import NDArray
+from sklearn.metrics import silhouette_samples, silhouette_score
 
 
 class BaseErrorMetric(ABC):
