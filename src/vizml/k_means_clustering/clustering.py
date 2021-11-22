@@ -3,6 +3,7 @@ from plotly.graph_objects import Figure
 from sklearn.cluster import KMeans
 from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import Normal2DGenerator, Normal3DGenerator, NormalDataGenerator
+from vizml.metrics.clustering_metrics import AvgSilhouetteScore, AllSilhouetteScores
 
 
 class KMeansClustering:
@@ -15,16 +16,17 @@ class KMeansClustering:
         self.clustering = KMeans(n_clusters=no_clusters)
         self.randomize = randomize
         self.is_3d = is_3d
+        self.no_points = no_points
         dpgen: NormalDataGenerator
         if self.is_3d:
             dpgen = Normal3DGenerator(random=randomize, random_state=random_state)
-            self.data_points = dpgen.generate(no_of_points=no_points)
+            self.data_points = dpgen.generate(no_of_points=self.no_points)
             self.x1_values = self.data_points[:, 0]
             self.x2_values = self.data_points[:, 1]
             self.y_values = self.data_points[:, 2]
         else:
             dpgen = Normal2DGenerator(random=randomize, random_state=random_state)
-            self.data_points = dpgen.generate(no_of_points=no_points)
+            self.data_points = dpgen.generate(no_of_points=self.no_points)
             self.x_values = self.data_points[:, 0]
             self.y_values = self.data_points[:, 1]
 
@@ -187,6 +189,95 @@ class KMeansClustering:
 
         if kwargs.get('save'):
             fig.write_image('show_elbow_method_plot.jpeg')
+
+        if kwargs.get('return_fig'):
+            return fig
+
+        fig.show()
+
+    def show_silhouette_plot(self, **kwargs) -> Figure:
+        """
+        Shows a plot of the Silhouette Coefficient values of the data points.
+
+        Pass save=True as a keyword argument to save figure.
+
+        Pass return_fig=True as a keyword argument to return the figure.
+        """
+
+        sample_silhouette_values = AllSilhouetteScores().compute(self.data_points, self.labels)
+        scores_label = list(zip(sample_silhouette_values, self.labels))
+
+        # Bug in mypy - cannot use lambda inside sort
+        def _key0(x):
+            return x[0]
+
+        def _key1(x):
+            return x[1]
+
+        scores_label.sort(key=_key0, reverse=True)
+        scores_label.sort(key=_key1)
+
+        fig = go.Figure(data=[go.Bar(x=list(range(1, self.no_points + 1)), y=[x[0] for x in scores_label],
+                                     marker=dict(color=[x[1] for x in scores_label]),
+                                     name='Sample Silhouette Scores')])
+
+        fig.update_layout(
+            title="Silhouette Coefficient Values",
+            xaxis_title="Number of Data Points",
+            yaxis_title="Silhouette Score",
+            title_x=0.5,
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
+        )
+        fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+        fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+
+        if kwargs.get('save'):
+            fig.write_image('show_silhouette_plot.jpeg')
+
+        if kwargs.get('return_fig'):
+            return fig
+
+        fig.show()
+
+    def show_avg_silhouette_scores(self, **kwargs) -> Figure:
+        """
+        Shows a plot of the no_clusters vs Average Silhouette Scores.
+
+        Pass save=True as a keyword argument to save figure.
+
+        Pass return_fig=True as a keyword argument to return the figure.
+        """
+
+        silhouette_scores = []
+        silhouette_scores_rounded = []
+        for i in range(2, 21):
+            k_means = KMeans(n_clusters=i)
+            k_means.fit(self.data_points)
+            silhouette_score = AvgSilhouetteScore().compute(self.data_points, k_means.labels_)
+            silhouette_scores.append(silhouette_score)
+            silhouette_scores_rounded.append(round(silhouette_score, 3))
+
+        fig = go.Figure(data=[go.Scatter(x=list(range(2, 21)), y=silhouette_scores,
+                                         marker=dict(color='#6D9886'), name='Average Silhouette Scores')])
+
+        fig.update_layout(
+            title="Average Silhouette Scores",
+            xaxis_title="Number of Clusters",
+            yaxis_title="Silhouette Score",
+            title_x=0.5,
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
+        )
+        fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+        fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+
+        if kwargs.get('save'):
+            fig.write_image('show_avg_silhouette_scores.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
