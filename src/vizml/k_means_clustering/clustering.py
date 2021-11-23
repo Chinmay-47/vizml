@@ -160,13 +160,13 @@ class KMeansClustering:
         """
 
         wcss_list = []
-        for i in range(1, 21):
+        for i in range(2, 11):
             k_means = KMeans(n_clusters=i)
             k_means.fit(self.data_points)
             inertia = k_means.inertia_
             wcss_list.append(inertia)
 
-        fig = go.Figure(data=[go.Scatter(x=list(range(1, 21)), y=wcss_list,
+        fig = go.Figure(data=[go.Scatter(x=list(range(2, 11)), y=wcss_list,
                                          marker=dict(color='#6D9886'), name='Elbow Plot')])
 
         fig.add_traces(data=[go.Scatter(x=[self.no_clusters],
@@ -253,14 +253,14 @@ class KMeansClustering:
 
         silhouette_scores = []
         silhouette_scores_rounded = []
-        for i in range(2, 21):
+        for i in range(2, 11):
             k_means = KMeans(n_clusters=i)
             k_means.fit(self.data_points)
             silhouette_score = AvgSilhouetteScore().compute(self.data_points, k_means.labels_)
             silhouette_scores.append(silhouette_score)
             silhouette_scores_rounded.append(round(silhouette_score, 3))
 
-        fig = go.Figure(data=[go.Scatter(x=list(range(2, 21)), y=silhouette_scores,
+        fig = go.Figure(data=[go.Scatter(x=list(range(2, 11)), y=silhouette_scores,
                                          marker=dict(color='#6D9886'), name='Average Silhouette Scores')])
 
         fig.update_layout(
