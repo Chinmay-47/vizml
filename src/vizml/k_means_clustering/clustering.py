@@ -170,7 +170,7 @@ class KMeansClustering:
                                          marker=dict(color='#6D9886'), name='Elbow Plot')])
 
         fig.add_traces(data=[go.Scatter(x=[self.no_clusters],
-                                        y=[wcss_list[self.no_clusters - 1]], mode='markers',
+                                        y=[wcss_list[self.no_clusters - 2]], mode='markers',
                                         marker=dict(size=8, color='#FFFFFF'),
                                         name='Current Clusters')])
 
