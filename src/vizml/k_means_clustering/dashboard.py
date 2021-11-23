@@ -18,14 +18,18 @@ k_means_clustering_visualizer.layout = html.Div([
                 style=DASH_STYLE),
         dcc.Tab(label='Elbow Method Plot', value='tab-3',
                 style=DASH_STYLE),
+        dcc.Tab(label='Silhouette Plot', value='tab-4',
+                style=DASH_STYLE),
+        dcc.Tab(label='Average Silhouette Scores', value='tab-5',
+                style=DASH_STYLE),
     ], style=DASH_STYLE),
     html.Div([
         dcc.Slider(
             id="no-clusters",
-            min=1,
-            max=20,
+            min=2,
+            max=10,
             step=1,
-            marks={str(i): "{} clusters".format(i) for i in range(2, 21, 4)},
+            marks={str(i): "{} clusters".format(i) for i in (3, 6, 9)},
             tooltip={"placement": "bottom", "always_visible": False},
             value=3,
             dots=False)
@@ -65,7 +69,9 @@ k_means_clustering_visualizer.layout = html.Div([
     dcc.Store(id='random-state'),
     dcc.Store(id='plot1'),
     dcc.Store(id='plot2'),
-    dcc.Store(id='plot3')
+    dcc.Store(id='plot3'),
+    dcc.Store(id='plot4'),
+    dcc.Store(id='plot5')
 ], style=DASH_STYLE)
 
 
@@ -88,6 +94,8 @@ def update_random_state(random_val):
     Output(component_id='plot1', component_property='figure'),
     Output(component_id='plot2', component_property='figure'),
     Output(component_id='plot3', component_property='figure'),
+    Output(component_id='plot4', component_property='figure'),
+    Output(component_id='plot5', component_property='figure'),
     Input(component_id='random-state', component_property='value'),
     Input(component_id='no-points', component_property='value'),
     Input(component_id='no-clusters', component_property='value'),
@@ -102,7 +110,8 @@ def init_clustering(random_state, num_points, num_clusters, num_dim):
                            is_3d=is_3d)
     clu.train()
 
-    return clu.show_data(return_fig=True), clu.show_clusters(return_fig=True), clu.show_elbow_plot(return_fig=True)
+    return (clu.show_data(return_fig=True), clu.show_clusters(return_fig=True), clu.show_elbow_plot(return_fig=True),
+            clu.show_silhouette_plot(return_fig=True), clu.show_avg_silhouette_scores(return_fig=True))
 
 
 @k_means_clustering_visualizer.callback(
@@ -110,17 +119,23 @@ def init_clustering(random_state, num_points, num_clusters, num_dim):
     Input(component_id='plot-tabs', component_property='value'),
     Input(component_id='plot1', component_property='figure'),
     Input(component_id='plot2', component_property='figure'),
-    Input(component_id='plot3', component_property='figure')
+    Input(component_id='plot3', component_property='figure'),
+    Input(component_id='plot4', component_property='figure'),
+    Input(component_id='plot5', component_property='figure')
 )
-def update_plots(plot_tab, fig1, fig2, fig3):
+def update_plots(plot_tab, fig1, fig2, fig3, fig4, fig5):
     """Updates the plot based on the chosen tab."""
 
     if plot_tab == "tab-1":
         return fig1
     elif plot_tab == "tab-2":
         return fig2
-    else:
+    elif plot_tab == "tab-3":
         return fig3
+    elif plot_tab == "tab-4":
+        return fig4
+    else:
+        return fig5
 
 
 if __name__ == '__main__':
