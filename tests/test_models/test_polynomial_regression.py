@@ -49,3 +49,12 @@ def test_random_state():
     data2 = reg2.data_points
 
     assert equal(data1, data2).all()
+
+
+def test_equation():
+    """Tests the equation property of Polynomial Regression"""
+
+    reg1 = PolynomialRegression()
+    reg1.train()
+
+    assert reg1.equation == "$0.0 - 0.08x + 0.02x^2$"
