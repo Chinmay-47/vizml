@@ -19,7 +19,7 @@ class PolynomialRegression:
     def __init__(self, no_points: int = 20, is_increasing: bool = True, randomize: bool = False,
                  random_state: int = -1, degree: int = 2):
 
-        self.regressor = LinearRegression(n_jobs=-1)
+        self.regressor = LinearRegression(n_jobs=-1, fit_intercept=False)
         self.randomize = randomize
         self.degree = degree
         self.no_points = no_points
