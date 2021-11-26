@@ -57,4 +57,4 @@ def test_equation():
     reg1 = PolynomialRegression()
     reg1.train()
 
-    assert reg1.equation == "$0.0 - 0.08x + 0.02x^2$"
+    assert reg1.equation == "5.1 - 0.08x + 0.02x^2"

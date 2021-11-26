@@ -89,7 +89,7 @@ class PolynomialRegression:
         """Utility function to get the equation of the polynomial regression."""
 
         equation_list = [f"{coeff}x^{i}" for i, coeff in enumerate(coeffs)]
-        equation = "$" + " + ".join(equation_list) + "$"
+        equation = " + ".join(equation_list)
         replace_map = {"x^0": "", "x^1": "x", '+ -': '- '}
         for old, new in replace_map.items():
             equation = equation.replace(old, new)
