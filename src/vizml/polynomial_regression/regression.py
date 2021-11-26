@@ -1,5 +1,8 @@
+from typing import Any
+
 import numpy as np
 import plotly.graph_objects as go
+from numpy.typing import NDArray
 from plotly.graph_objects import Figure
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
@@ -81,6 +84,22 @@ class PolynomialRegression:
 
         fig.show()
 
+    @staticmethod
+    def _format_coeff(coeffs: NDArray[Any]) -> str:
+        """Utility function to get the equation of the polynomial regression."""
+
+        equation_list = [f"{coeff}x^{i}" for i, coeff in enumerate(coeffs)]
+        equation = "$" + " + ".join(equation_list) + "$"
+        replace_map = {"x^0": "", "x^1": "x", '+ -': '- '}
+        for old, new in replace_map.items():
+            equation = equation.replace(old, new)
+
+        return equation
+
+    @property
+    def equation(self):
+        return self._format_coeff(self.regressor.coef_.round(2)[0])
+
     def show_regression_curve(self, **kwargs) -> Figure:
         """
         Shows a plot of the current regression curve with data.
@@ -95,10 +114,10 @@ class PolynomialRegression:
 
         fig.add_traces(data=[go.Scatter(x=self.x_range.squeeze(),
                                         y=self._predicted_vals_for_plot().squeeze(),
-                                        name='Regression Curve', marker=dict(color='#6D9886'))])
+                                        name="Regression Curve", marker=dict(color='#6D9886'))])
 
         fig.update_layout(
-            title="Regression Curve",
+            title=self.equation,
             xaxis_title="X Values",
             yaxis_title="Y Values",
             title_x=0.5,
