@@ -4,14 +4,14 @@
 ![Tests](https://github.com/Chinmay-47/vizml/actions/workflows/tests.yml/badge.svg?style=plastic)
 ![Commits](https://img.shields.io/github/commit-activity/y/Chinmay-47/vizml?label=Commits&style=plastic)
 ![License](https://img.shields.io/github/license/Chinmay-47/vizml?label=License&style=plastic)
-![Python](https://img.shields.io/badge/Python-3.8%2C%203.9-blue?style=plastic)
+![Python](https://img.shields.io/badge/Python-3.8%20|%203.9-blue?style=plastic)
 
 <br>
 
 ## About
 Vizml is a project to visualize popular ML algorithms and is 
 intended to serve as an educational tool.
-Vizml employs Dash to create dashboards that display the 
+Vizml employs Dash to create interactive dashboards to display the 
 visualizations, and the plots are formed leveraging Plotly.
 
 <br>
@@ -51,12 +51,13 @@ Some ideas for contribution are:
 - Accepting external data from users for custom visualizations
 - Documentation for the sub-modules
 - Extending the project to visualize more algorithms
+- Additional visualizations to existing algorithms and dashboards
 
 <br>
 
 ## Running Tests
 After installing in editable mode, run the following 
-commands from the project root directory.
+commands from the project root directory to run all the tests.
 ```
 mypy src tests
 flake8 src tests
