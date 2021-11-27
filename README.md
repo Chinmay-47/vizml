@@ -45,7 +45,7 @@ However, the ideal users would be:
 <br>
 
 ## Contribute
-Contributions to enhance the project are welcome.
+Contributions to enhance the project are welcome and appreciated.
 
 Some ideas for contribution are:
 - Accepting external data from users for custom visualizations
