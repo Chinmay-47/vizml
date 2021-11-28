@@ -88,6 +88,11 @@ class DBScan:
         """Gets the labels"""
         return self.clustering.labels_
 
+    @property
+    def num_clusters(self):
+        """Returns the number of clusters"""
+        return len({x for x in set(self.labels) if x != -1})
+
     def _get_outliers_2d(self):
         """Returns outliers from the data points separately during 2d config."""
 
