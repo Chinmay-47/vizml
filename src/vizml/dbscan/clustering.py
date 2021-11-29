@@ -3,7 +3,7 @@ from plotly.graph_objects import Figure
 from sklearn.cluster import DBSCAN
 from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import Normal2DGenerator, Normal3DGenerator, NormalDataGenerator
-from vizml.metrics.clustering_metrics import AllSilhouetteScores
+from vizml.metrics.clustering_metrics import AllSilhouetteScores, AvgSilhouetteScore
 
 
 class DBScan:
@@ -80,18 +80,27 @@ class DBScan:
         fig.show()
 
     def train(self) -> None:
-        """Trains the Model"""
+        """Trains the Model."""
+
         self.clustering.fit(self.data_points)
 
     @property
     def labels(self):
-        """Gets the labels"""
+        """Gets the labels."""
+
         return self.clustering.labels_
 
     @property
-    def num_clusters(self):
-        """Returns the number of clusters"""
+    def num_clusters(self) -> int:
+        """Returns the number of clusters."""
+
         return len({x for x in set(self.labels) if x != -1})
+
+    @property
+    def num_outliers(self) -> int:
+        """Returns the number of outliers."""
+
+        return len([x for x in self.labels if x == -1])
 
     def _get_outliers_2d(self):
         """Returns outliers from the data points separately during 2d config."""
@@ -121,6 +130,14 @@ class DBScan:
             outliers_y.append(yval)
 
         return outliers_x1, outliers_x2, outliers_y
+
+    @property
+    def avg_silhouette_score(self) -> float:
+        """Returns the average silhouette score of the data points."""
+
+        _score = round(AvgSilhouetteScore().compute(self.data_points, self.labels), 2)
+
+        return float(_score)
 
     def show_clusters(self, **kwargs) -> Figure:
         """
@@ -221,6 +238,42 @@ class DBScan:
             title="Silhouette Coefficient Values",
             xaxis_title="Number of Data Points",
             yaxis_title="Silhouette Score",
+            title_x=0.5,
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
+        )
+        fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+        fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+
+        if kwargs.get('save'):
+            fig.write_image('show_silhouette_plot.jpeg')
+
+        if kwargs.get('return_fig'):
+            return fig
+
+        fig.show()
+
+    def show_metrics(self, **kwargs) -> Figure:
+        """
+        Shows a plot of the metrics related to the model.
+
+        Pass save=True as a keyword argument to save figure.
+
+        Pass return_fig=True as a keyword argument to return the figure.
+        """
+
+        _metrics_x = [self.num_clusters, self.avg_silhouette_score, self.num_outliers]
+        _metrics_y = ["Clusters Detected", "Average Silhouette Score", "Outliers Detected"]
+
+        fig = go.Figure(data=[go.Bar(x=_metrics_x, y=_metrics_y,
+                                     text=_metrics_x, textposition='outside',
+                                     marker=dict(color='#FF4C29', opacity=0.6),
+                                     orientation='h')])
+
+        fig.update_layout(
+            title="Metrics",
             title_x=0.5,
             plot_bgcolor=DASH_STYLE["backgroundColor"],
             paper_bgcolor=DASH_STYLE["backgroundColor"],
