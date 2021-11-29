@@ -1,3 +1,5 @@
+from collections import Counter
+
 import plotly.graph_objects as go
 from plotly.graph_objects import Figure
 from sklearn.cluster import DBSCAN
@@ -285,6 +287,43 @@ class DBScan:
 
         if kwargs.get('save'):
             fig.write_image('show_silhouette_plot.jpeg')
+
+        if kwargs.get('return_fig'):
+            return fig
+
+        fig.show()
+
+    def show_freq_distribution(self, **kwargs) -> Figure:
+        """
+        Shows a plot of the frequency distribution of the data points in each cluster.
+
+        Pass save=True as a keyword argument to save figure.
+
+        Pass return_fig=True as a keyword argument to return the figure.
+        """
+
+        counts = Counter(self.labels)
+        _x, _y = list(zip(*counts.items()))
+
+        fig = go.Figure(data=[go.Bar(x=_x, y=_y,
+                                     text=_y, textposition='outside',
+                                     marker=dict(color='#FF4C29', opacity=0.7))])
+
+        fig.update_layout(
+            title="Data Points in Each Cluster",
+            title_x=0.5,
+            xaxis_title="Labels",
+            yaxis_title="Frequency",
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
+        )
+        fig.update_xaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+        fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
+
+        if kwargs.get('save'):
+            fig.write_image('show_freq_distribution.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
