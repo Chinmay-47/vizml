@@ -298,7 +298,7 @@ class KMeansClustering:
         _x, _y = list(zip(*Counter(self.labels).items()))
 
         fig = go.Figure(data=[go.Bar(x=_x, y=_y,
-                                     text=_y, textposition='outside',
+                                     text=_y, textposition='inside',
                                      marker=dict(color='#FF4C29', opacity=0.7))])
 
         fig.update_layout(
