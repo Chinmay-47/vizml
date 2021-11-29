@@ -25,6 +25,8 @@ class DashBoard:
                     style=DASH_STYLE),
             dcc.Tab(label='Average Silhouette Scores', value='tab-5',
                     style=DASH_STYLE),
+            dcc.Tab(label='Cluster Frequencies', value='tab-6',
+                    style=DASH_STYLE),
         ], style=DASH_STYLE),
         html.Div([
             dcc.Slider(
@@ -74,7 +76,8 @@ class DashBoard:
         dcc.Store(id='plot2'),
         dcc.Store(id='plot3'),
         dcc.Store(id='plot4'),
-        dcc.Store(id='plot5')
+        dcc.Store(id='plot5'),
+        dcc.Store(id='plot6')
     ], style=DASH_STYLE)
 
     @staticmethod
@@ -99,6 +102,7 @@ class DashBoard:
         Output(component_id='plot3', component_property='figure'),
         Output(component_id='plot4', component_property='figure'),
         Output(component_id='plot5', component_property='figure'),
+        Output(component_id='plot6', component_property='figure'),
         Input(component_id='random-state', component_property='value'),
         Input(component_id='no-points', component_property='value'),
         Input(component_id='no-clusters', component_property='value'),
@@ -115,7 +119,7 @@ class DashBoard:
 
         return (clu.show_data(return_fig=True), clu.show_clusters(return_fig=True),
                 clu.show_elbow_plot(return_fig=True), clu.show_silhouette_plot(return_fig=True),
-                clu.show_avg_silhouette_scores(return_fig=True))
+                clu.show_avg_silhouette_scores(return_fig=True), clu.show_freq_distribution(return_fig=True))
 
     @staticmethod
     @_k_means_clustering_visualizer.callback(
@@ -125,9 +129,10 @@ class DashBoard:
         Input(component_id='plot2', component_property='figure'),
         Input(component_id='plot3', component_property='figure'),
         Input(component_id='plot4', component_property='figure'),
-        Input(component_id='plot5', component_property='figure')
+        Input(component_id='plot5', component_property='figure'),
+        Input(component_id='plot6', component_property='figure')
     )
-    def _update_plots(plot_tab, fig1, fig2, fig3, fig4, fig5):
+    def _update_plots(plot_tab, fig1, fig2, fig3, fig4, fig5, fig6):
         """Updates the plot based on the chosen tab."""
 
         if plot_tab == "tab-1":
@@ -138,8 +143,10 @@ class DashBoard:
             return fig3
         elif plot_tab == "tab-4":
             return fig4
-        else:
+        elif plot_tab == "tab-5":
             return fig5
+        else:
+            return fig6
 
     def run(self):
         """Runs a dashboard on localhost to visualize K Means Clustering."""
