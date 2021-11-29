@@ -302,8 +302,7 @@ class DBScan:
         Pass return_fig=True as a keyword argument to return the figure.
         """
 
-        counts = Counter(self.labels)
-        _x, _y = list(zip(*counts.items()))
+        _x, _y = list(zip(*Counter(self.labels).items()))
 
         fig = go.Figure(data=[go.Bar(x=_x, y=_y,
                                      text=_y, textposition='outside',
