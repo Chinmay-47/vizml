@@ -137,7 +137,11 @@ class DBScan:
     def avg_silhouette_score(self) -> float:
         """Returns the average silhouette score of the data points."""
 
-        _score = round(AvgSilhouetteScore().compute(self.data_points, self.labels), 2)
+        try:
+            _score = round(AvgSilhouetteScore().compute(self.data_points, self.labels), 2)
+        except ValueError:
+            # Happens when there is only one label
+            return 1.0
 
         return float(_score)
 
@@ -219,7 +223,11 @@ class DBScan:
         Pass return_fig=True as a keyword argument to return the figure.
         """
 
-        sample_silhouette_values = AllSilhouetteScores().compute(self.data_points, self.labels)
+        try:
+            sample_silhouette_values = AllSilhouetteScores().compute(self.data_points, self.labels)
+        except ValueError:
+            # Happens when there is only one cluster
+            sample_silhouette_values = [1.0] * len(self.labels)
         scores_label = list(zip(sample_silhouette_values, self.labels))
 
         # Bug in mypy - cannot use lambda inside sort
