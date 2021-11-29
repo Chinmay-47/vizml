@@ -45,6 +45,15 @@ def test_show_silhouette_plot():
     assert isinstance(fig, Figure)
 
 
+def test_show_show_freq_distribution():
+    """Tests the show frequency distribution function in K Means Clustering."""
+
+    clu = KMeansClustering()
+    clu.train()
+    fig = clu.show_freq_distribution(return_fig=True)
+    assert isinstance(fig, Figure)
+
+
 def test_show_data_3d():
     """Tests the show data function in K means Clustering for 3d config."""
 
@@ -84,6 +93,15 @@ def test_show_silhouette_plot_3d():
     clu = KMeansClustering(is_3d=True)
     clu.train()
     fig = clu.show_silhouette_plot(return_fig=True)
+    assert isinstance(fig, Figure)
+
+
+def test_show_show_freq_distribution_3d():
+    """Tests the show frequency distribution function in K Means Clustering for 3d config."""
+
+    clu = KMeansClustering(is_3d=True)
+    clu.train()
+    fig = clu.show_freq_distribution(return_fig=True)
     assert isinstance(fig, Figure)
 
 
