@@ -11,12 +11,12 @@ from vizml.metrics.clustering_metrics import AllSilhouetteScores, AvgSilhouetteS
 class DBScan:
     """Class to perform and visualize Density Based Spatial Clustering of Applications with Noise."""
 
-    def __init__(self, no_points: int = 100, min_no_points: int = 10, min_dist: float = 0.5,
+    def __init__(self, no_points: int = 100, min_no_points: int = 10, max_dist: float = 0.5,
                  randomize: bool = False, random_state: int = -1, is_3d: bool = False):
 
         self.min_no_points = min_no_points
-        self.min_dist = min_dist
-        self.clustering = DBSCAN(eps=self.min_dist, min_samples=self.min_no_points, n_jobs=-1)
+        self.max_dist = max_dist
+        self.clustering = DBSCAN(eps=self.max_dist, min_samples=self.min_no_points, n_jobs=-1)
         self.randomize = randomize
         self.is_3d = is_3d
         self.no_points = no_points

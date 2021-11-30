@@ -107,8 +107,8 @@ def test_show_show_freq_distribution_3d():
 def test_avg_silhouette_score_3d(test_vals):
     """Tests the average silhouette score property in DBScan for 3d config."""
 
-    _min_dist, avg_sil_score = test_vals
-    clu = DBScan(is_3d=True, min_dist=_min_dist)
+    _max_dist, avg_sil_score = test_vals
+    clu = DBScan(is_3d=True, max_dist=_max_dist)
     clu.train()
     assert avg_sil_score == clu.avg_silhouette_score
 
