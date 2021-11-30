@@ -1,3 +1,4 @@
+from vizml.dbscan.dashboard import DashBoard as DashBoard_DBScan
 from vizml.k_means_clustering.dashboard import DashBoard as DashBoard_KMeansClustering
 from vizml.multi_linear_regression.dashboard import DashBoard as DashBoard_MultiLinearRegression
 from vizml.polynomial_regression.dashboard import DashBoard as DashBoard_PolynomialRegression
@@ -25,3 +26,8 @@ class Visualize:
     def polynomial_regression():
         """Runs a dashboard on localhost to visualize Polynomial Regression."""
         DashBoard_PolynomialRegression().run()
+
+    @staticmethod
+    def dbscan():
+        """Runs a dashboard on localhost to visualize DBScan."""
+        DashBoard_DBScan().run()
