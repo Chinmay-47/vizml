@@ -155,8 +155,13 @@ class LinearlySeparable2DGenerator(ClassificationDataGenerator):
         if no_of_points == 0:
             return np.array([[], [], []]).transpose()
 
+        try:
+            random_state = self.seed_value
+        except AttributeError:
+            random_state = None
+
         x, y = make_classification(n_samples=no_of_points, n_features=2, n_redundant=0, n_informative=2,
-                                   random_state=self.seed_value, n_classes=no_classes, n_clusters_per_class=1)
+                                   random_state=random_state, n_classes=no_classes, n_clusters_per_class=1)
 
         return np.array(list(zip(*(x[:, 0], x[:, 1], y))))
 
@@ -169,7 +174,12 @@ class LinearlySeparable3DGenerator(ClassificationDataGenerator):
         if no_of_points == 0:
             return np.array([[], [], [], []]).transpose()
 
+        try:
+            random_state = self.seed_value
+        except AttributeError:
+            random_state = None
+
         x, y = make_classification(n_samples=no_of_points, n_features=3, n_redundant=0, n_informative=3,
-                                   random_state=self.seed_value, n_classes=no_classes, n_clusters_per_class=1)
+                                   random_state=random_state, n_classes=no_classes, n_clusters_per_class=1)
 
         return np.array(list(zip(*(x[:, 0], x[:, 1], x[:, 2], y))))
