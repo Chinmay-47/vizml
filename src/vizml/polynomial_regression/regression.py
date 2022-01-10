@@ -28,7 +28,7 @@ class PolynomialRegression:
         dpgen = Linear1DGenerator(random=randomize, random_state=random_state)
         self.x_values = dpgen.generate(no_of_points=no_points)
         self.y_values = dpgen.generate(no_of_points=no_points, is_increasing=is_increasing)
-        self.data_points: Any = np.array(list(zip(*(self.x_values.squeeze(), self.y_values.squeeze()))))
+        self.data_points: Any = np.concatenate((self.x_values, self.y_values), axis=1)
 
         poly_reg = PolynomialFeatures(degree=self.degree)
         poly_reg.fit(self.x_values)

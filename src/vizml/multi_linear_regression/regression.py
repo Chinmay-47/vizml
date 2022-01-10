@@ -22,7 +22,7 @@ class MultiLinearRegression:
         dpgen2 = Linear1DGenerator(random=randomize, random_state=random_state)
         self.x_values = dpgen1.generate(no_of_points=no_points)
         self.y_values = dpgen2.generate(no_of_points=no_points, is_increasing=is_increasing)
-        self.data_points: Any = np.array(list(zip(*(self.x_values[:, 0], self.x_values[:, 1], self.y_values.squeeze()))))
+        self.data_points: Any = np.concatenate((self.x_values, self.y_values), axis=1)
 
     def train(self) -> None:
         """Trains the Model"""
