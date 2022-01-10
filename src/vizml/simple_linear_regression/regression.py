@@ -1,3 +1,5 @@
+from typing import Any
+
 import numpy as np
 import plotly.graph_objects as go
 from plotly.graph_objects import Figure
@@ -19,7 +21,7 @@ class SimpleLinearRegression:
         dpgen = Linear1DGenerator(random=randomize, random_state=random_state)
         self.x_values = dpgen.generate(no_of_points=no_points)
         self.y_values = dpgen.generate(no_of_points=no_points, is_increasing=is_increasing)
-        self.data_points = np.concatenate((self.x_values, self.y_values), axis=1)
+        self.data_points: Any = np.array(list(zip(*(self.x_values.squeeze(), self.y_values.squeeze()))))
 
     def train(self) -> None:
         """Trains the Model"""
