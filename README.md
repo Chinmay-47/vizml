@@ -63,3 +63,12 @@ mypy src tests
 flake8 src tests
 pytest
 ```
+
+<br>
+
+## Resources
+I would like to thank them for the content and highly recommend checking them out:
+
+- [ArjanCodes](https://www.youtube.com/c/ArjanCodes)
+- [mCoding](https://www.youtube.com/c/mCodingWithJamesMurphy)
+- [freeCodeCamp.org](https://www.youtube.com/c/Freecodecamp)
