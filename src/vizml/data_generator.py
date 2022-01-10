@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
 import numpy as np
 from sklearn.datasets import make_classification
@@ -155,6 +156,7 @@ class LinearlySeparable2DGenerator(ClassificationDataGenerator):
         if no_of_points == 0:
             return np.array([[], [], []]).transpose()
 
+        random_state: Optional[int]
         try:
             random_state = self.seed_value
         except AttributeError:
@@ -174,6 +176,7 @@ class LinearlySeparable3DGenerator(ClassificationDataGenerator):
         if no_of_points == 0:
             return np.array([[], [], [], []]).transpose()
 
+        random_state: Optional[int]
         try:
             random_state = self.seed_value
         except AttributeError:
