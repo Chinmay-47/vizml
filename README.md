@@ -67,8 +67,11 @@ pytest
 <br>
 
 ## Resources
-I would like to thank them for the content and highly recommend checking them out:
+I would highly recommend checking them out:
 
 - [ArjanCodes](https://www.youtube.com/c/ArjanCodes)
 - [mCoding](https://www.youtube.com/c/mCodingWithJamesMurphy)
+- [Dash Python User Guide](https://dash.plotly.com/)
+- [Scikit-Learn API Reference](https://scikit-learn.org/stable/modules/classes.html)
+- [codebasics](https://www.youtube.com/c/codebasics)
 - [freeCodeCamp.org](https://www.youtube.com/c/Freecodecamp)
