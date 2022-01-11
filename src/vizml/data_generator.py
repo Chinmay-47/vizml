@@ -165,6 +165,8 @@ class LinearlySeparable2DGenerator(ClassificationDataGenerator):
         x, y = make_classification(n_samples=no_of_points, n_features=2, n_redundant=0, n_informative=2,
                                    random_state=random_state, n_classes=no_classes, n_clusters_per_class=1)
 
+        x += 1.5 * np.random.uniform(size=x.shape)
+
         return np.concatenate((x, np.expand_dims(y, axis=1)), axis=1)
 
 
@@ -184,5 +186,7 @@ class LinearlySeparable3DGenerator(ClassificationDataGenerator):
 
         x, y = make_classification(n_samples=no_of_points, n_features=3, n_redundant=0, n_informative=3,
                                    random_state=random_state, n_classes=no_classes, n_clusters_per_class=1)
+
+        x += 1.5 * np.random.uniform(size=x.shape)
 
         return np.concatenate((x, np.expand_dims(y, axis=1)), axis=1)
