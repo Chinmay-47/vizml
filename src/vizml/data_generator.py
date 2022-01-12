@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional
 
 import numpy as np
-from sklearn.datasets import make_classification, make_moons
+from sklearn.datasets import make_classification, make_moons, make_circles
 
 
 class BaseDataGenerator(ABC):
@@ -226,6 +226,46 @@ class MoonData3DGenerator(ClassificationDataGenerator):
             random_state = None
 
         x, y = make_moons(n_samples=no_of_points, noise=0.2, random_state=random_state)
+
+        x = np.array([np.concatenate([item, np.array([1.5 * np.random.random()])]) for item in x])
+
+        return np.concatenate((x, np.expand_dims(y, axis=1)), axis=1)
+
+
+class CircleDataGenerator(ClassificationDataGenerator):
+
+    def generate(self, no_of_points: int = 10):
+        """Generates circular 2D data along with labels for classification."""
+
+        if no_of_points == 0:
+            return np.array([[], [], []]).transpose()
+
+        random_state: Optional[int]
+        try:
+            random_state = self.seed_value
+        except AttributeError:
+            random_state = None
+
+        x, y = make_circles(n_samples=no_of_points, noise=0.2, factor=0.5, random_state=random_state)
+
+        return np.concatenate((x, np.expand_dims(y, axis=1)), axis=1)
+
+
+class SphericalDataGenerator(ClassificationDataGenerator):
+
+    def generate(self, no_of_points: int = 10):
+        """Generates spherical 3D data along with labels for classification."""
+
+        if no_of_points == 0:
+            return np.array([[], [], [], []]).transpose()
+
+        random_state: Optional[int]
+        try:
+            random_state = self.seed_value
+        except AttributeError:
+            random_state = None
+
+        x, y = make_circles(n_samples=no_of_points, noise=0.2, factor=0.5, random_state=random_state)
 
         x = np.array([np.concatenate([item, np.array([1.5 * np.random.random()])]) for item in x])
 
