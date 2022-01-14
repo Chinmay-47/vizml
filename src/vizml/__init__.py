@@ -6,6 +6,7 @@ from vizml.simple_linear_regression.dashboard import DashBoard as DashBoard_Simp
 
 
 class Visualize:
+    """Aggregator class to run visualizations."""
 
     @staticmethod
     def simple_linear_regression():
