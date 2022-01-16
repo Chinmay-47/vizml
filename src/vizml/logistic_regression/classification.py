@@ -6,6 +6,7 @@ from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import (LinearlySeparable2DGenerator, LinearlySeparable3DGenerator,
                                   MoonData2DGenerator, MoonData3DGenerator,
                                   CircleDataGenerator, SphericalDataGenerator)
+from vizml.metrics.classification_metrics import compute_all_metrics, compute_all_prob_metrics
 
 
 class LogisticRegression:
@@ -100,8 +101,13 @@ class LogisticRegression:
 
     @property
     def predicted_values(self):
-        """Y-values predicted by the model"""
+        """Labels predicted by the model"""
         return self.classifier.predict(self.data_points)
+
+    @property
+    def decision_function(self):
+        """Decision Probabilities predicted by the model."""
+        return self.classifier.decision_function(self.data_points)
 
     def show_decision_boundary(self, **kwargs) -> Figure:
         """
@@ -250,6 +256,53 @@ class LogisticRegression:
 
         if kwargs.get('save'):
             fig.write_image('show_clusters.jpeg')
+
+        if kwargs.get('return_fig'):
+            return fig
+
+        fig.show()
+
+    def show_metrics(self, **kwargs) -> Figure:
+        """
+        Shows a plot of the different metrics for current classifier.
+
+        Pass save=True as a keyword argument to save figure.
+
+        Pass return_fig=True as a keyword argument to return the figure.
+        """
+
+        computed_metrics = compute_all_metrics(self.labels, self.predicted_values)
+        metric_type, metric_val = tuple(zip(*computed_metrics))
+
+        computed_prob_metrics = compute_all_prob_metrics(self.labels, self.decision_function)
+        prob_metric_type, prob_metric_val = tuple(zip(*computed_prob_metrics))
+
+        metric_type += prob_metric_type
+        metric_val += prob_metric_val
+
+        metric_type = tuple(reversed(metric_type))
+        metric_val = tuple(reversed(metric_val))
+
+        fig = go.Figure(data=[go.Bar(x=metric_val, y=metric_type, text=metric_val, textposition='inside',
+                                     orientation='h', marker=dict(color='#FF4C29', opacity=0.6))])
+
+        fig.update_layout(
+            title="Classification Metrics Computed",
+            xaxis_title="Metric Value",
+            yaxis_title="Metric Name",
+            title_x=0.5,
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
+        )
+
+        fig.update_yaxes(type='category')
+        fig.update_xaxes(showgrid=False)
+        fig.update_yaxes(showgrid=False)
+
+        if kwargs.get('save'):
+            fig.write_image('show_error_scores.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
