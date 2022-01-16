@@ -58,7 +58,7 @@ class LogisticRegression:
         if self.is_3d:
             fig = go.Figure(data=[go.Scatter3d(x=self.x1_values.squeeze(), y=self.x2_values.squeeze(),
                                                z=self.y_values.squeeze(), mode='markers',
-                                               marker=dict(size=8, color=self.labels.squeeze(), opacity=0.7))])
+                                               marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8))])
             fig.update_layout(
                 title="Logistic Regression Data",
                 title_x=0.5,
@@ -70,7 +70,7 @@ class LogisticRegression:
 
         else:
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
-                                             marker=dict(size=8, color=self.labels.squeeze(), opacity=0.7))])
+                                             marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8))])
 
             fig.update_layout(
                 title="Logistic Regression Data",
@@ -127,7 +127,7 @@ class LogisticRegression:
 
             fig = go.Figure(data=[go.Scatter3d(x=self.x1_values.squeeze(), y=self.x2_values.squeeze(),
                                                z=self.y_values.squeeze(), mode='markers',
-                                               marker=dict(size=8, color=self.labels, opacity=0.7),
+                                               marker=dict(size=8, color=self.labels, opacity=0.8),
                                                name='Data Points')])
 
             fig.add_traces(data=[go.Scatter3d(x=xx.ravel(), y=yy.ravel(), z=zz.ravel(), opacity=0.2,
@@ -151,7 +151,7 @@ class LogisticRegression:
             Z = self.regressor.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
 
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
-                                             marker=dict(size=8, color=self.labels.squeeze(), opacity=0.7),
+                                             marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8),
                                              name='Data Points')])
 
             fig.add_traces(data=[go.Contour(x=x_range_vals, y=y_range_vals, z=Z, connectgaps=True,
@@ -204,7 +204,7 @@ class LogisticRegression:
 
             fig = go.Figure(data=[go.Scatter3d(x=self.x1_values.squeeze(), y=self.x2_values.squeeze(),
                                                z=self.y_values.squeeze(), mode='markers', showlegend=False,
-                                               marker=dict(size=8, color=self.labels, opacity=0.7))])
+                                               marker=dict(size=8, color=self.labels, opacity=0.8))])
 
             fig.add_traces(data=[go.Scatter3d(x=xx.ravel(), y=yy.ravel(), z=zz.ravel(), opacity=0.2,
                                               marker=dict(color=Z, opacity=0.2, showscale=True),
@@ -229,7 +229,7 @@ class LogisticRegression:
             Z = (Z - Z.mean()) / (Z.max() - Z.min())
 
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
-                                             marker=dict(size=8, color=self.labels.squeeze(), opacity=0.7),
+                                             marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8),
                                              showlegend=False)])
 
             fig.add_traces(data=[go.Contour(x=x_range_vals, y=y_range_vals, z=Z, connectgaps=True,
