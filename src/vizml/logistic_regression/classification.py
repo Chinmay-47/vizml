@@ -44,7 +44,7 @@ class LogisticRegression:
             self.labels = self.generated_data[:, 2]
             self.data_points = self.generated_data[:, :2]
 
-        self.regressor = LogReg(n_jobs=-1)
+        self.classifier = LogReg(n_jobs=-1)
 
     def show_data(self, **kwargs) -> Figure:
         """
@@ -96,12 +96,12 @@ class LogisticRegression:
 
     def train(self) -> None:
         """Trains the Model"""
-        self.regressor.fit(self.data_points, self.labels)
+        self.classifier.fit(self.data_points, self.labels)
 
     @property
     def predicted_values(self):
         """Y-values predicted by the model"""
-        return self.regressor.predict(self.data_points)
+        return self.classifier.predict(self.data_points)
 
     def show_decision_boundary(self, **kwargs) -> Figure:
         """
@@ -123,7 +123,7 @@ class LogisticRegression:
             xx, yy = np.meshgrid(x_range_vals, y_range_vals)
             zz, _ = np.meshgrid(z_range_vals, z_range_vals)
 
-            Z = self.regressor.predict(np.c_[xx.ravel(), yy.ravel(), zz.ravel()])
+            Z = self.classifier.predict(np.c_[xx.ravel(), yy.ravel(), zz.ravel()])
 
             fig = go.Figure(data=[go.Scatter3d(x=self.x1_values.squeeze(), y=self.x2_values.squeeze(),
                                                z=self.y_values.squeeze(), mode='markers',
@@ -148,7 +148,7 @@ class LogisticRegression:
             x_range_vals = np.linspace(x_min, x_max, 200)
             y_range_vals = np.linspace(y_min, y_max, 200)
             xx, yy = np.meshgrid(x_range_vals, y_range_vals)
-            Z = self.regressor.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+            Z = self.classifier.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
 
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
                                              marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8),
@@ -198,7 +198,7 @@ class LogisticRegression:
             xx, yy = np.meshgrid(x_range_vals, y_range_vals)
             zz, _ = np.meshgrid(z_range_vals, z_range_vals)
 
-            Z = self.regressor.decision_function(np.c_[xx.ravel(), yy.ravel(), zz.ravel()])
+            Z = self.classifier.decision_function(np.c_[xx.ravel(), yy.ravel(), zz.ravel()])
 
             Z = (Z - Z.mean()) / (Z.max() - Z.min())
 
@@ -225,7 +225,7 @@ class LogisticRegression:
             x_range_vals = np.linspace(x_min, x_max, 200)
             y_range_vals = np.linspace(y_min, y_max, 200)
             xx, yy = np.meshgrid(x_range_vals, y_range_vals)
-            Z = self.regressor.decision_function(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+            Z = self.classifier.decision_function(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
             Z = (Z - Z.mean()) / (Z.max() - Z.min())
 
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
