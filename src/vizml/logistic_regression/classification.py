@@ -177,7 +177,7 @@ class LogisticRegression:
             fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
 
         if kwargs.get('save'):
-            fig.write_image('show_clusters.jpeg')
+            fig.write_image('show_decision_boundary.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
@@ -255,7 +255,7 @@ class LogisticRegression:
             fig.update_yaxes(gridcolor='#000000', zerolinewidth=2, zerolinecolor='#000000')
 
         if kwargs.get('save'):
-            fig.write_image('show_clusters.jpeg')
+            fig.write_image('show_decision_probabilities.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
@@ -302,7 +302,7 @@ class LogisticRegression:
         fig.update_yaxes(showgrid=False)
 
         if kwargs.get('save'):
-            fig.write_image('show_error_scores.jpeg')
+            fig.write_image('show_metrics.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
