@@ -5,7 +5,7 @@ from typing import Sequence, Union, Any, List, Tuple
 from numpy.typing import NDArray
 from sklearn.metrics import (accuracy_score, f1_score, precision_score, recall_score, log_loss, roc_auc_score,
                              hinge_loss, cohen_kappa_score, hamming_loss, jaccard_score, matthews_corrcoef,
-                             balanced_accuracy_score)
+                             balanced_accuracy_score, confusion_matrix)
 
 
 class BaseErrorMetric(ABC):
@@ -111,6 +111,14 @@ class RocAucScore(BaseErrorMetric):
     def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
                 array2: Union[NDArray[Any], Sequence[Any]]):
         return roc_auc_score(array1, array2)
+
+
+class ConfusionMatrix(BaseErrorMetric):
+    """Class to compute the Confusion Matrix"""
+
+    def compute(self, array1: Union[NDArray[Any], Sequence[Any]],
+                array2: Union[NDArray[Any], Sequence[Any]]):
+        return confusion_matrix(array1, array2)
 
 
 class Metric(Enum):
