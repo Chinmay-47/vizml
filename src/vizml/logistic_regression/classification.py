@@ -275,7 +275,7 @@ class LogisticRegression:
         z = [[fp, tn], [tp, fn]]
 
         fig = go.Figure(data=[go.Heatmap(x=["P", "N"], y=["N", "P"], z=z, showscale=False,
-                                         opacity=0.7, text=z, texttemplate="%{text}", textfont={"bold": True})])
+                                         opacity=0.7, text=z, texttemplate="%{text}")])
 
         fig.update_layout(
             title="Confusion Matrix",
