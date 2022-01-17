@@ -6,7 +6,7 @@ from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
 from vizml.data_generator import (LinearlySeparable2DGenerator, LinearlySeparable3DGenerator,
                                   MoonData2DGenerator, MoonData3DGenerator,
                                   CircleDataGenerator, SphericalDataGenerator)
-from vizml.metrics.classification_metrics import compute_all_metrics, compute_all_prob_metrics
+from vizml.metrics.classification_metrics import compute_all_metrics, compute_all_prob_metrics, ConfusionMatrix
 
 
 class LogisticRegression:
@@ -256,6 +256,45 @@ class LogisticRegression:
 
         if kwargs.get('save'):
             fig.write_image('show_decision_probabilities.jpeg')
+
+        if kwargs.get('return_fig'):
+            return fig
+
+        fig.show()
+
+    def show_confusion_matrix(self, **kwargs) -> Figure:
+        """
+        Shows a plot of the Confusion Matrix for current classifier.
+
+        Pass save=True as a keyword argument to save figure.
+
+        Pass return_fig=True as a keyword argument to return the figure.
+        """
+
+        tn, fp, fn, tp = ConfusionMatrix().compute(self.labels, self.predicted_values).ravel()
+        z = [[fp, tn], [tp, fn]]
+
+        fig = go.Figure(data=[go.Heatmap(x=["P", "N"], y=["N", "P"], z=z, showscale=False,
+                                         opacity=0.7, text=z, texttemplate="%{text}", textfont={"bold": True})])
+
+        fig.update_layout(
+            title="Confusion Matrix",
+            xaxis_title="Predicted Labels",
+            yaxis_title="Actual Labels",
+            title_x=0.5,
+            plot_bgcolor=DASH_STYLE["backgroundColor"],
+            paper_bgcolor=DASH_STYLE["backgroundColor"],
+            font_color=DASH_STYLE["color"],
+            template=PLOT_TEMPLATE
+        )
+
+        fig.update_yaxes(type='category')
+        fig.update_xaxes(type='category')
+        fig.update_xaxes(showgrid=False)
+        fig.update_yaxes(showgrid=False)
+
+        if kwargs.get('save'):
+            fig.write_image('show_confusion_matrix.jpeg')
 
         if kwargs.get('return_fig'):
             return fig
