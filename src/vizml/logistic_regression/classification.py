@@ -274,8 +274,8 @@ class LogisticRegression:
         tn, fp, fn, tp = ConfusionMatrix().compute(self.labels, self.predicted_values).ravel()
         z = [[fp, tn], [tp, fn]]
 
-        fig = go.Figure(data=[go.Heatmap(x=["P", "N"], y=["N", "P"], z=z, showscale=False,
-                                         opacity=0.7, text=z, texttemplate="%{text}")])
+        fig = go.Figure(data=[go.Heatmap(x=["P", "N"], y=["N", "P"], z=z, opacity=0.7,
+                                         text=z, texttemplate="%{z}", colorscale='Blackbody')])
 
         fig.update_layout(
             title="Confusion Matrix",
