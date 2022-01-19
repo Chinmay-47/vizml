@@ -103,10 +103,10 @@ class DashBoard:
         Input(component_id='data-shape', component_property='value'),
         Input(component_id='no-dimensions', component_property='value')
     )
-    def _init_classifier(random_state, no_points, data_shape, n_dims):
+    def _init_classifier(random_state, no_points, data_shape, num_dim):
         """Initializes the classifier and stores the initial plots."""
 
-        is_3d = True if n_dims == '3d' else False
+        is_3d = False if num_dim == '2d' else True
 
         clf = LogisticRegression(no_points=no_points, random_state=random_state, data_shape=data_shape, is_3d=is_3d)
 
@@ -134,7 +134,7 @@ class DashBoard:
         return plots[plot_tab]
 
     def run(self):
-        """Runs a dashboard on localhost to visualize Multi Linear Regression."""
+        """Runs a dashboard on localhost to visualize Logistic Regression."""
 
         self._logistic_regression_visualizer.run_server()
 
