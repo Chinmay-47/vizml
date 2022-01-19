@@ -1,5 +1,6 @@
 from vizml.dbscan.dashboard import DashBoard as DashBoard_DBScan
 from vizml.k_means_clustering.dashboard import DashBoard as DashBoard_KMeansClustering
+from vizml.logistic_regression.dashboard import DashBoard as DashBoard_LogisticRegression
 from vizml.multi_linear_regression.dashboard import DashBoard as DashBoard_MultiLinearRegression
 from vizml.polynomial_regression.dashboard import DashBoard as DashBoard_PolynomialRegression
 from vizml.simple_linear_regression.dashboard import DashBoard as DashBoard_SimpleLinearRegression
@@ -32,3 +33,8 @@ class Visualize:
     def dbscan():
         """Runs a dashboard on localhost to visualize DBScan."""
         DashBoard_DBScan().run()
+
+    @staticmethod
+    def logistic_regression():
+        """Runs a dashboard on localhost to visualize Logistic Regression."""
+        DashBoard_LogisticRegression().run()
