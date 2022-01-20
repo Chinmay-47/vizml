@@ -1,4 +1,4 @@
-from numpy import equal
+from numpy import equal, ndarray
 from plotly.graph_objects import Figure
 from vizml.logistic_regression.classification import LogisticRegression
 
@@ -221,3 +221,21 @@ def test_random_state_3d_circle():
     data2 = clf2.data_points
 
     assert equal(data1, data2).all()
+
+
+def test_decision_function():
+    """Tests the decision function property for Logistic Regression."""
+
+    clf = LogisticRegression()
+    clf.train()
+
+    assert isinstance(clf.decision_function, ndarray)
+
+
+def test_decision_function_3d():
+    """Tests the decision function property for Logistic Regression for 3d config."""
+
+    clf = LogisticRegression(is_3d=True)
+    clf.train()
+
+    assert isinstance(clf.decision_function, ndarray)
