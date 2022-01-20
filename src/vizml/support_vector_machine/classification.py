@@ -45,13 +45,13 @@ class SupportVectorMachine:
             self.labels = self.generated_data[:, 2]
             self.data_points = self.generated_data[:, :2]
 
-        self._kernel = kernel
-        self.classifier = SVC(kernel=self._kernel)
+        self.kernel = kernel
+        self.classifier = SVC(kernel=self.kernel)
 
     def change_kernel(self, kernel: str) -> None:
         """Function to change a kernel to fit the same data."""
-        self._kernel = kernel
-        self.classifier = SVC(kernel=self._kernel)
+        self.kernel = kernel
+        self.classifier = SVC(kernel=self.kernel)
 
     def show_data(self, **kwargs) -> Figure:
         """
