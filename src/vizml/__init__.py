@@ -4,6 +4,7 @@ from vizml.logistic_regression.dashboard import DashBoard as DashBoard_LogisticR
 from vizml.multi_linear_regression.dashboard import DashBoard as DashBoard_MultiLinearRegression
 from vizml.polynomial_regression.dashboard import DashBoard as DashBoard_PolynomialRegression
 from vizml.simple_linear_regression.dashboard import DashBoard as DashBoard_SimpleLinearRegression
+from vizml.support_vector_machine.dashboard import DashBoard as DashBoard_SupportVectorMachines
 
 
 class Visualize:
@@ -38,3 +39,8 @@ class Visualize:
     def logistic_regression():
         """Runs a dashboard on localhost to visualize Logistic Regression."""
         DashBoard_LogisticRegression().run()
+
+    @staticmethod
+    def support_vector_machines():
+        """Runs a dashboard on localhost to visualize Support Vector Machines."""
+        DashBoard_SupportVectorMachines().run()
