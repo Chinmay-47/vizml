@@ -231,10 +231,6 @@ class SupportVectorMachine:
                                                z=self.y_values.squeeze(), mode='markers', showlegend=False,
                                                marker=dict(size=8, color=self.labels, opacity=0.8))])
 
-            fig.add_traces(data=[go.Scatter3d(x=self.support_vectors[:, 0], y=self.support_vectors[:, 1],
-                                              z=self.support_vectors[:, 2], name='Support Vectors', mode='markers',
-                                              marker=dict(size=8, color='#FFFFFF'))])
-
             fig.add_traces(data=[go.Scatter3d(x=xx.ravel(), y=yy.ravel(), z=zz.ravel(), opacity=0.2,
                                               marker=dict(color=Z, opacity=0.2, showscale=True),
                                               showlegend=False)])
@@ -260,10 +256,6 @@ class SupportVectorMachine:
             fig = go.Figure(data=[go.Scatter(x=self.x_values.squeeze(), y=self.y_values.squeeze(), mode='markers',
                                              marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8),
                                              showlegend=False)])
-
-            fig.add_traces(data=[go.Scatter(x=self.support_vectors[:, 0], y=self.support_vectors[:, 1],
-                                            name='Support Vectors', mode='markers',
-                                            marker=dict(size=8, color='#FFFFFF'))])
 
             fig.add_traces(data=[go.Contour(x=x_range_vals, y=y_range_vals, z=Z, connectgaps=True,
                                             opacity=0.5, showscale=True, showlegend=False)])
