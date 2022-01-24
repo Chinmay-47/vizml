@@ -23,7 +23,7 @@ def test_show_decision_boundary():
 def test_show_decision_probabilities():
     """Tests the show decision probabilities function in K Nearest Neighbours classifier."""
 
-    clf = KNearestNeighbours(no_points=10)
+    clf = KNearestNeighbours(no_points=10, k_neighbors=2)
     clf.train()
     fig = clf.show_decision_probabilities(return_fig=True)
     assert isinstance(fig, Figure)
@@ -67,7 +67,7 @@ def test_show_decision_boundary_3d():
 def test_show_decision_probabilities_3d():
     """Tests the show decision probabilities function in K Nearest Neighbours classifier for 3d config."""
 
-    clf = KNearestNeighbours(is_3d=True, no_points=10)
+    clf = KNearestNeighbours(is_3d=True, no_points=10, k_neighbors=2)
     clf.train()
     fig = clf.show_decision_probabilities(return_fig=True)
     assert isinstance(fig, Figure)
