@@ -1,5 +1,6 @@
 from vizml.dbscan.dashboard import DashBoard as DashBoard_DBScan
 from vizml.k_means_clustering.dashboard import DashBoard as DashBoard_KMeansClustering
+from vizml.k_nearest_neighbours.dashboard import DashBoard as DashBoard_KNN
 from vizml.logistic_regression.dashboard import DashBoard as DashBoard_LogisticRegression
 from vizml.multi_linear_regression.dashboard import DashBoard as DashBoard_MultiLinearRegression
 from vizml.polynomial_regression.dashboard import DashBoard as DashBoard_PolynomialRegression
@@ -44,3 +45,8 @@ class Visualize:
     def support_vector_machines():
         """Runs a dashboard on localhost to visualize Support Vector Machines."""
         DashBoard_SupportVectorMachines().run()
+
+    @staticmethod
+    def k_nearest_neighbors():
+        """Runs a dashboard on localhost to visualize K Nearest Neighbors Classifier."""
+        DashBoard_KNN().run()
