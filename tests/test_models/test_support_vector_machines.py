@@ -271,7 +271,7 @@ def test_change_kernel():
 def test_change_num_clusters_3d():
     """Tests the function to change the kernel in Support Vector Machine for 3d config."""
 
-    clf = SupportVectorMachine(kernel='poly')
+    clf = SupportVectorMachine(kernel='poly', is_3d=True)
     clf.change_kernel('rbf')
 
     assert clf.kernel == 'rbf' and clf.classifier.kernel == 'rbf'
