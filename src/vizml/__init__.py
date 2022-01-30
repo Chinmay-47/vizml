@@ -3,6 +3,7 @@ from vizml.k_means_clustering.dashboard import DashBoard as DashBoard_KMeansClus
 from vizml.k_nearest_neighbours.dashboard import DashBoard as DashBoard_KNN
 from vizml.logistic_regression.dashboard import DashBoard as DashBoard_LogisticRegression
 from vizml.multi_linear_regression.dashboard import DashBoard as DashBoard_MultiLinearRegression
+from vizml.naive_bayes.dashboard import DashBoard as DashBoard_NaiveBayes
 from vizml.polynomial_regression.dashboard import DashBoard as DashBoard_PolynomialRegression
 from vizml.simple_linear_regression.dashboard import DashBoard as DashBoard_SimpleLinearRegression
 from vizml.support_vector_machine.dashboard import DashBoard as DashBoard_SupportVectorMachines
@@ -50,3 +51,8 @@ class Visualize:
     def k_nearest_neighbors():
         """Runs a dashboard on localhost to visualize K Nearest Neighbors Classifier."""
         DashBoard_KNN().run()
+
+    @staticmethod
+    def naive_bayes():
+        """Runs a dashboard on localhost to visualize Naive Bayes Classifier."""
+        DashBoard_NaiveBayes().run()
