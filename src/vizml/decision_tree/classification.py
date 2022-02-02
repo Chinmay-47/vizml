@@ -48,7 +48,7 @@ class DecisionTree:
         self.max_depth = max_depth
         self.classifier = DecisionTreeClassifier(max_depth=self.max_depth)
 
-    def change_max_depth(self, kernel: str) -> None:
+    def change_max_depth(self, kernel: int) -> None:
         """Function to change max depth to fit the same data."""
         self.max_depth = kernel
         self.classifier = DecisionTreeClassifier(max_depth=self.max_depth)
