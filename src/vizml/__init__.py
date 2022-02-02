@@ -1,4 +1,5 @@
 from vizml.dbscan.dashboard import DashBoard as DashBoard_DBScan
+from vizml.decision_tree.dashboard import DashBoard as DashBoard_DecisionTree
 from vizml.k_means_clustering.dashboard import DashBoard as DashBoard_KMeansClustering
 from vizml.k_nearest_neighbours.dashboard import DashBoard as DashBoard_KNN
 from vizml.logistic_regression.dashboard import DashBoard as DashBoard_LogisticRegression
@@ -56,3 +57,8 @@ class Visualize:
     def naive_bayes():
         """Runs a dashboard on localhost to visualize Naive Bayes Classifier."""
         DashBoard_NaiveBayes().run()
+
+    @staticmethod
+    def decision_tree():
+        """Runs a dashboard on localhost to visualize Decision Tree Classifier."""
+        DashBoard_DecisionTree().run()
