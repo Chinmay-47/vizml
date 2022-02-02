@@ -239,3 +239,21 @@ def test_decision_function_3d():
     clf.train()
 
     assert isinstance(clf.decision_function, ndarray)
+
+
+def test_change_max_depth():
+    """Tests the function to change the max depth in Decision Tree."""
+
+    clf = DecisionTree(max_depth=7)
+    clf.change_max_depth(17)
+
+    assert clf.max_depth == 17 and clf.classifier.max_depth == 17
+
+
+def test_change_max_depth_3d():
+    """Tests the function to change the max depth in Decision Tree for 3d config."""
+
+    clf = DecisionTree(max_depth=7, is_3d=True)
+    clf.change_max_depth(17)
+
+    assert clf.max_depth == 17 and clf.classifier.max_depth == 17
