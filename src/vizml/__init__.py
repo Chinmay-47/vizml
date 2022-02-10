@@ -1,3 +1,4 @@
+from vizml.bagging_classifier.dashboard import DashBoard as DashBoard_BaggingClassifier
 from vizml.dbscan.dashboard import DashBoard as DashBoard_DBScan
 from vizml.decision_tree.dashboard import DashBoard as DashBoard_DecisionTree
 from vizml.k_means_clustering.dashboard import DashBoard as DashBoard_KMeansClustering
@@ -62,3 +63,8 @@ class Visualize:
     def decision_tree():
         """Runs a dashboard on localhost to visualize Decision Tree Classifier."""
         DashBoard_DecisionTree().run()
+
+    @staticmethod
+    def bagging_classifier():
+        """Runs a dashboard on localhost to visualize Bagging Classifier."""
+        DashBoard_BaggingClassifier().run()
