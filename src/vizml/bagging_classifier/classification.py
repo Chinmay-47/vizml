@@ -66,6 +66,12 @@ class BaggingClassifier:
         self.classifier = BaggingClf(base_estimator=self.base_classifier, n_estimators=self.n_estimators,
                                      max_samples=self.max_samples, n_jobs=-1)
 
+    def change_max_samples(self, new_max_samples: float) -> None:
+        """Function to change max samples to fit the same data."""
+        self.max_samples = new_max_samples
+        self.classifier = BaggingClf(base_estimator=self.base_classifier, n_estimators=self.n_estimators,
+                                     max_samples=self.max_samples, n_jobs=-1)
+
     def change_n_estimators(self, new_n_estimators: int) -> None:
         """Function to change number of estimators to fit the same data."""
         self.n_estimators = new_n_estimators
