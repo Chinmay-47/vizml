@@ -49,6 +49,17 @@ class DashBoard:
                 dots=False)
         ], style={**DASH_STYLE, **{'margin-top': '5px', 'margin-bottom': '5px'}}),
         html.Div([
+            dcc.Slider(
+                id="max-samples",
+                min=10,
+                max=100,
+                step=10,
+                marks={str(i): "{}% samples per estimator".format(i) for i in range(0, 110, 30)},
+                tooltip={"placement": "bottom", "always_visible": False},
+                value=70,
+                dots=False)
+        ], style={**DASH_STYLE, **{'margin-top': '5px', 'margin-bottom': '5px'}}),
+        html.Div([
             dcc.RadioItems(
                 id='base-classifier',
                 options=[
@@ -128,15 +139,17 @@ class DashBoard:
         Input(component_id='data-shape', component_property='value'),
         Input(component_id='no-dimensions', component_property='value'),
         Input(component_id='n-estimators', component_property='value'),
-        Input(component_id='base-classifier', component_property='value')
+        Input(component_id='base-classifier', component_property='value'),
+        Input(component_id='max-samples', component_property='value')
     )
-    def _init_classifier(random_state, no_points, data_shape, num_dim, n_estimators, base_classifier):
+    def _init_classifier(random_state, no_points, data_shape, num_dim, n_estimators, base_classifier, max_samples):
         """Initializes the classifier and stores the initial plots."""
 
         is_3d = False if num_dim == '2d' else True
 
         clf = BaggingClassifier(no_points=no_points, random_state=random_state, data_shape=data_shape,
-                                is_3d=is_3d, n_estimators=n_estimators, base_classifier=base_classifier)
+                                is_3d=is_3d, n_estimators=n_estimators, base_classifier=base_classifier,
+                                max_samples=max_samples/100)
 
         clf.train()
 
