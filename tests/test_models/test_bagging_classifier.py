@@ -267,3 +267,20 @@ def test_change_n_estimators():
     clf.change_n_estimators(17)
 
     assert clf.n_estimators == 17
+
+
+def test_default_max_samples():
+    """Tests the default max samples in Bagging Classifier."""
+
+    clf = BaggingClassifier()
+
+    assert clf.max_samples == 0.7
+
+
+def test_change_max_samples():
+    """Tests the function to change the max samples in Bagging Classifier."""
+
+    clf = BaggingClassifier()
+    clf.change_max_samples(0.2)
+
+    assert clf.max_samples == 0.2
