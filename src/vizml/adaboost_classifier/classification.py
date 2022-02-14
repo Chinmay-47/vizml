@@ -15,11 +15,11 @@ from vizml.metrics.classification_metrics import compute_all_metrics, compute_al
 
 
 class AdaBoostClassifier:
-    """Class to perform Classification and visualize Bagging Classifier."""
+    """Class to perform Classification and visualize AdaBoost Classifier."""
 
     def __init__(self, no_points: int = 100, randomize: bool = False, random_state: int = -1,
                  is_3d: bool = False, data_shape: str = 'linearly_separable',
-                 base_classifier: str = 'dt', n_estimators: int = 10, max_samples: float = 0.7):
+                 base_classifier: str = 'dt', n_estimators: int = 10):
 
         data_shape_generators = {(False, 'linearly_separable'): LinearlySeparable2DGenerator(random=randomize,
                                                                                              random_state=random_state),
@@ -56,7 +56,6 @@ class AdaBoostClassifier:
 
         self.base_classifier = self.base_models.get(base_classifier)
         self.n_estimators = n_estimators
-        self.max_samples = max_samples
         self.classifier = AdaBoost(base_estimator=self.base_classifier, n_estimators=self.n_estimators)
 
     def change_base_classifier(self, new_base_clf: str) -> None:
@@ -83,7 +82,7 @@ class AdaBoostClassifier:
                                                z=self.y_values.squeeze(), mode='markers',
                                                marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8))])
             fig.update_layout(
-                title="Bagging Classifier Data",
+                title="AdaBoost Classifier Data",
                 title_x=0.5,
                 plot_bgcolor=DASH_STYLE["backgroundColor"],
                 paper_bgcolor=DASH_STYLE["backgroundColor"],
@@ -96,7 +95,7 @@ class AdaBoostClassifier:
                                              marker=dict(size=8, color=self.labels.squeeze(), opacity=0.8))])
 
             fig.update_layout(
-                title="Bagging Classifier Data",
+                title="AdaBoost Classifier Data",
                 xaxis_title="X Values",
                 yaxis_title="Y Values",
                 title_x=0.5,
@@ -133,7 +132,7 @@ class AdaBoostClassifier:
 
     def show_decision_boundary(self, **kwargs) -> Figure:
         """
-        Shows a plot of the decision boundary formed by Bagging Classifier.
+        Shows a plot of the decision boundary formed by AdaBoost Classifier.
 
         Pass save=True as a keyword argument to save figure.
 
@@ -208,7 +207,7 @@ class AdaBoostClassifier:
 
     def show_decision_probabilities(self, **kwargs) -> Figure:
         """
-        Shows a plot of the decision probabilities formed by Bagging Classifier.
+        Shows a plot of the decision probabilities formed by AdaBoost Classifier.
 
         Pass save=True as a keyword argument to save figure.
 
