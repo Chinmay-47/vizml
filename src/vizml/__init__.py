@@ -1,3 +1,4 @@
+from vizml.adaboost_classifier.dashboard import DashBoard as DashBoard_AdaBoostClassifier
 from vizml.bagging_classifier.dashboard import DashBoard as DashBoard_BaggingClassifier
 from vizml.dbscan.dashboard import DashBoard as DashBoard_DBScan
 from vizml.decision_tree.dashboard import DashBoard as DashBoard_DecisionTree
@@ -68,3 +69,8 @@ class Visualize:
     def bagging_classifier():
         """Runs a dashboard on localhost to visualize Bagging Classifier."""
         DashBoard_BaggingClassifier().run()
+
+    @staticmethod
+    def adaboost_classifier():
+        """Runs a dashboard on localhost to visualize AdaBoost Classifier."""
+        DashBoard_AdaBoostClassifier().run()
