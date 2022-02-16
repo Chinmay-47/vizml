@@ -4,7 +4,6 @@ from plotly.graph_objects import Figure
 from sklearn.ensemble import AdaBoostClassifier as AdaBoost
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import LinearSVC
 from sklearn.tree import DecisionTreeClassifier
 from vizml._dashboard_configs import DASH_STYLE, PLOT_TEMPLATE
@@ -51,12 +50,13 @@ class AdaBoostClassifier:
             self.labels = self.generated_data[:, 2]
             self.data_points = self.generated_data[:, :2]
 
-        self.base_models = {'dt': DecisionTreeClassifier(), 'lr': LogisticRegression(),
-                            'knn': KNeighborsClassifier(), 'nb': GaussianNB(), 'svm': LinearSVC()}
+        self.base_models = {'dt': DecisionTreeClassifier(), 'lr': LogisticRegression(), 'nb': GaussianNB(),
+                            'svm': LinearSVC()}
 
         self.base_classifier = self.base_models.get(base_classifier)
         self.n_estimators = n_estimators
-        self.classifier = AdaBoost(base_estimator=self.base_classifier, n_estimators=self.n_estimators)
+        self.classifier = AdaBoost(base_estimator=self.base_classifier, n_estimators=self.n_estimators,
+                                   algorithm="SAMME")
 
     def change_base_classifier(self, new_base_clf: str) -> None:
         """Function to change base classifier to fit the same data."""
