@@ -36,6 +36,8 @@ Visualize.k_means_clustering()
 ```
 This runs a dashboard on your localhost on port 8050.
 
+<video src="https://github.com/Chinmay-47/vizml/blob/main/media/K_Means_Clustering.mov" controls="controls" style="max">
+
 <br>
 
 ## Who can use Vizml?
