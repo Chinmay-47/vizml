@@ -37,7 +37,7 @@ Visualize.k_means_clustering()
 This runs a dashboard on your localhost on port 8050.
 
 
-https://user-images.githubusercontent.com/42812489/156216448-16b50697-3a51-43eb-ab8e-2be800c59876.mp4
+https://user-images.githubusercontent.com/42812489/156216708-3ff59d67-5e87-4984-ad81-00faa46f66c4.mp4
 
 
 <br>
