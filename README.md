@@ -26,6 +26,9 @@ pip install -e .
 <br>
 
 ## Usage
+The Visualize class is an aggregation of all the different algorithms. 
+However, the classes for each algorithm can be found in the modules.
+
 ```python
 from vizml import Visualize
 
@@ -37,7 +40,7 @@ This runs a dashboard on your localhost on port 8050.
 
 ## Who can use Vizml?
 Vizml is an open source project that can be used by anybody. 
-However, the ideal users would be:
+However, the intended users would be:
 - Beginners who are new to ML algorithms
 - Teachers who want to use visualizations in their courses
 - Anybody who wants to refresh their understanding of ML algorithms
@@ -49,9 +52,9 @@ Contributions to enhance the project are welcome and appreciated.
 
 Some ideas for contribution are:
 - Accepting external data from users for custom visualizations
-- Documentation for the sub-modules
 - Extending the project to visualize more algorithms
 - Additional visualizations to existing algorithms and dashboards
+- Lastly, documentation for the modules
 
 <br>
 
