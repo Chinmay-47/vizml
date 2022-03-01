@@ -26,7 +26,7 @@ pip install -e .
 <br>
 
 ## Usage
-The Visualize class is an aggregation of all the different algorithms. 
+The Visualize class is for convenience and is used to aggregate and run visualizations of all the different algorithms. 
 However, the classes for each algorithm can be found in the modules.
 
 ```python
